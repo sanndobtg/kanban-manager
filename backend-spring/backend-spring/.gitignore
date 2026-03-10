@@ -32,15 +32,15 @@ build/
 ### VS Code ###
 .vscode/
 
-#maven
+### maven ###
 *.class
 
-#IDE
+### IDE ###
 .idea/
 
-#Spring
+### Spring ###
 *.jar
 *.war
 
-#Env
+### Env ###
 application-local.yaml
