@@ -1,6 +1,6 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.entities.Tache;
+import fr.ubo.kanban.model.Tache;
 import java.util.List;
 
 public interface TacheService {

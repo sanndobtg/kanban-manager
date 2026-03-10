@@ -1,7 +1,7 @@
 package fr.ubo.kanban.services.impl;
 
 import fr.ubo.kanban.common.exception.NotFoundException;
-import fr.ubo.kanban.entities.Tableau;
+import fr.ubo.kanban.model.Tableau;
 import fr.ubo.kanban.repositories.TableauRepository;
 import fr.ubo.kanban.services.TableauService;
 import lombok.RequiredArgsConstructor;

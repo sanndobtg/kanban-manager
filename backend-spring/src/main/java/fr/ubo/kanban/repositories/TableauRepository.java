@@ -1,6 +1,6 @@
 package fr.ubo.kanban.repositories;
 
-import fr.ubo.kanban.entities.Tableau;
+import fr.ubo.kanban.model.Tableau;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

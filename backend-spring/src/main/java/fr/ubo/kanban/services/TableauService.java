@@ -1,6 +1,6 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.entities.Tableau;
+import fr.ubo.kanban.model.Tableau;
 import java.util.List;
 
 public interface TableauService {

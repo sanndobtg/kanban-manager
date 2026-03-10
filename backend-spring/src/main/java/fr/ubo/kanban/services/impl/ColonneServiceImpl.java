@@ -1,7 +1,7 @@
 package fr.ubo.kanban.services.impl;
 
 import fr.ubo.kanban.common.exception.NotFoundException;
-import fr.ubo.kanban.entities.Colonne;
+import fr.ubo.kanban.model.Colonne;
 import fr.ubo.kanban.repositories.ColonneRepository;
 import fr.ubo.kanban.services.ColonneService;
 import lombok.RequiredArgsConstructor;

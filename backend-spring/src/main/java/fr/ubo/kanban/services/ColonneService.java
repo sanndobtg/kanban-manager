@@ -1,6 +1,6 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.entities.Colonne;
+import fr.ubo.kanban.model.Colonne;
 import java.util.List;
 
 public interface ColonneService {

@@ -1,6 +1,6 @@
 package fr.ubo.kanban.repositories;
 
-import fr.ubo.kanban.entities.Tache;
+import fr.ubo.kanban.model.Tache;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

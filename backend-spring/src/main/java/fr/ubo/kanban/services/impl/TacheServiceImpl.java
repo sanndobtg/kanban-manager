@@ -1,7 +1,7 @@
 package fr.ubo.kanban.services.impl;
 
 import fr.ubo.kanban.common.exception.NotFoundException;
-import fr.ubo.kanban.entities.Tache;
+import fr.ubo.kanban.model.Tache;
 import fr.ubo.kanban.repositories.TacheRepository;
 import fr.ubo.kanban.services.TacheService;
 import lombok.RequiredArgsConstructor;
