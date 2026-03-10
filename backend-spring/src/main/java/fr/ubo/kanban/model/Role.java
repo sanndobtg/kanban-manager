@@ -1,4 +1,4 @@
-package fr.ubo.kanban.common.sql;
+package fr.ubo.kanban.model;
 
 public enum Role {
     ADMIN, UTILISATEUR

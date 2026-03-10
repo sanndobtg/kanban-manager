@@ -1,6 +1,5 @@
-package fr.ubo.kanban.common.sql;
+package fr.ubo.kanban.model;
 
-import fr.ubo.kanban.model.Utilisateur;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;

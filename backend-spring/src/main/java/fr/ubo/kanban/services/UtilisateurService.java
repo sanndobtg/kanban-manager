@@ -1,6 +1,6 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.dto.UtilisateurDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
 
 import java.util.List;
 

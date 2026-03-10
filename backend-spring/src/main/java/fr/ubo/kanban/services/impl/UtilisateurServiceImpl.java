@@ -1,10 +1,10 @@
-package fr.ubo.kanban.services.servicesImpl;
+package fr.ubo.kanban.services.impl;
 
 
-import fr.ubo.kanban.dto.UtilisateurDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
 import fr.ubo.kanban.mappers.UtilisateurMapper;
 import fr.ubo.kanban.model.Utilisateur;
-import fr.ubo.kanban.repository.UtilisateurRepository;
+import fr.ubo.kanban.repositories.UtilisateurRepository;
 import fr.ubo.kanban.services.UtilisateurService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,10 +1,8 @@
 package fr.ubo.kanban.controllers;
 
-import fr.ubo.kanban.dto.UtilisateurDto;
-import fr.ubo.kanban.model.Utilisateur;
-import fr.ubo.kanban.services.servicesImpl.UtilisateurServiceImpl;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
+import fr.ubo.kanban.services.impl.UtilisateurServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

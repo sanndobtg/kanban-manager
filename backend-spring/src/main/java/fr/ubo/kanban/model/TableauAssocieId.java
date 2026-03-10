@@ -1,4 +1,4 @@
-package fr.ubo.kanban.common.sql;
+package fr.ubo.kanban.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

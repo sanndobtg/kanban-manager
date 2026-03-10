@@ -2,7 +2,7 @@ package fr.ubo.kanban.mappers;
 
 
 
-import fr.ubo.kanban.dto.UtilisateurDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
 import fr.ubo.kanban.model.Utilisateur;
 import org.springframework.stereotype.Component;
 
