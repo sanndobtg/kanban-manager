@@ -1,4 +1,4 @@
-package fr.ubo.kanban.common.sql;
+package fr.ubo.kanban.entities;
 
 import jakarta.persistence.*;
 import lombok.Data;
@@ -6,16 +6,20 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
 @Entity
-@Table(name = "tableau")
+@Table(name = "colonne")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Tableau {
+public class Colonne {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "nom", nullable = false, length = 45)
+    @Column(name = "nom", length = 45)
     private String nom;
+
+    @ManyToOne
+    @JoinColumn(name = "idTableau", nullable = false)
+    private Tableau tableau;
 }
