@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface TacheRepository extends JpaRepository<Tache, Integer> {
-    List<Tache> findByColonneId(Integer colonneId);
+public interface TacheRepository extends JpaRepository<Tache, Long> {
+    List<Tache> findByColonneId(Long colonneId);
 }

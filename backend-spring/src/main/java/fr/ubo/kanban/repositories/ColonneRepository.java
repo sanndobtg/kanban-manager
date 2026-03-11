@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface ColonneRepository extends JpaRepository<Colonne, Integer> {
-    List<Colonne> findByTableauId(Integer tableauId);
+public interface ColonneRepository extends JpaRepository<Colonne, Long> {
+    List<Colonne> findByTableauId(Long tableauId);
 }

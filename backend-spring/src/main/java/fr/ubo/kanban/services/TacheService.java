@@ -1,11 +1,14 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.model.Tache;
+import fr.ubo.kanban.dtos.tache.TacheDto;
+
 import java.util.List;
 
 public interface TacheService {
-    List<Tache> findByColonneId(Integer colonneId);
-    Tache findById(Integer id);
-    Tache save(Tache tache);
-    void delete(Integer id);
+    TacheDto saveTache(TacheDto dto);
+    TacheDto getTacheById(Long id);
+    List<TacheDto> getAllTaches();
+    List<TacheDto> getTachesByColonneId(Long idColonne);
+    TacheDto updateTache(Long id, TacheDto dto);
+    boolean deleteTache(Long id);
 }
