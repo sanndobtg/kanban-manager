@@ -1,24 +1,18 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
-
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurRequestDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurResponseDto;
 import java.util.List;
 
 public interface UtilisateurService {
 
-    UtilisateurDto saveUtilisateur(UtilisateurDto utilisateurDto);
+    UtilisateurResponseDto saveUtilisateur(UtilisateurRequestDto dto);
 
-    UtilisateurDto getUtilisateurById(Long UtilisateurId);
+    UtilisateurResponseDto getUtilisateurById(Long id);
 
-    boolean deleteUtilisateur(Long UtilisateurId);
+    boolean deleteUtilisateur(Long id);
 
-    List<UtilisateurDto> getAllUtilisateurs();
+    List<UtilisateurResponseDto> getAllUtilisateurs();
 
-    //UtilisateurDto login(String pseudo, String motDePasse);
-
-    UtilisateurDto updateUtilisateur(Long id, UtilisateurDto utilisateurDto);
-
-
+    UtilisateurResponseDto updateUtilisateur(Long id, UtilisateurRequestDto dto);
 }
-
-

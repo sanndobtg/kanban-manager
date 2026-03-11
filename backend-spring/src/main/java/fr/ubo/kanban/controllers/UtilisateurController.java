@@ -1,51 +1,45 @@
 package fr.ubo.kanban.controllers;
 
-import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
-import fr.ubo.kanban.services.impl.UtilisateurServiceImpl;
-import org.springframework.beans.factory.annotation.Autowired;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurRequestDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurResponseDto;
+import fr.ubo.kanban.services.UtilisateurService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("api/utilisateurs")
+@RequestMapping("/api/utilisateurs")
+@RequiredArgsConstructor
 public class UtilisateurController {
 
-    @Autowired
-    private UtilisateurServiceImpl utilisateurService;
-
-//    public CompteController(CompteServiceImpl compteService) {
-//        this.compteService = compteService;
-//    }
+    private final UtilisateurService utilisateurService;
 
     @GetMapping
-    public List<UtilisateurDto> getUtilisateurs() {
+    public List<UtilisateurResponseDto> getUtilisateurs() {
         return utilisateurService.getAllUtilisateurs();
     }
 
     @GetMapping("/{id}")
-    public UtilisateurDto getUtilisateur(@PathVariable Long id){
+    public UtilisateurResponseDto getUtilisateur(@PathVariable Long id) {
         return utilisateurService.getUtilisateurById(id);
     }
 
     @PostMapping
-    public UtilisateurDto saveUtilisateur(final @RequestBody UtilisateurDto utilisateurDto){
-        return utilisateurService.saveUtilisateur(utilisateurDto);
+    @ResponseStatus(HttpStatus.CREATED)
+    public UtilisateurResponseDto saveUtilisateur(@RequestBody UtilisateurRequestDto dto) {
+        return utilisateurService.saveUtilisateur(dto);
     }
 
     @DeleteMapping("/{id}")
-    public Boolean deleteUtilisateur(@PathVariable Long id){
-        return utilisateurService.deleteUtilisateur(id);
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteUtilisateur(@PathVariable Long id) {
+        utilisateurService.deleteUtilisateur(id);
     }
-
-//    @PostMapping("/login")
-//    public CompteDto login(@RequestBody CompteDto compteDto) {
-//        return compteService.login(compteDto.getPseudo(), compteDto.getMdp());
-//    }
 
     @PutMapping("/{id}")
-    public UtilisateurDto updateUtilisateur(@PathVariable Long id, @RequestBody UtilisateurDto utilisateurDto) {
-        return utilisateurService.updateUtilisateur(id, utilisateurDto);
+    public UtilisateurResponseDto updateUtilisateur(@PathVariable Long id, @RequestBody UtilisateurRequestDto dto) {
+        return utilisateurService.updateUtilisateur(id, dto);
     }
-
 }

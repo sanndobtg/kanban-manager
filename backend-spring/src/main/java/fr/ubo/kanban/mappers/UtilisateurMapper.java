@@ -1,48 +1,40 @@
 package fr.ubo.kanban.mappers;
 
-
-
-import fr.ubo.kanban.dtos.utilisateur.UtilisateurDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurRequestDto;
+import fr.ubo.kanban.dtos.utilisateur.UtilisateurResponseDto;
 import fr.ubo.kanban.model.Utilisateur;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UtilisateurMapper {
 
+    // Entité → ResponseDto (ce qu'on renvoie au client)
+    public UtilisateurResponseDto toResponseDto(Utilisateur utilisateur) {
+        if (utilisateur == null) return null;
 
-    public UtilisateurDto toDto(Utilisateur utilisateur) {
-        if (utilisateur == null) {
-            return null;
-        }
+        UtilisateurResponseDto dto = new UtilisateurResponseDto();
+        dto.setId(utilisateur.getId());
+        dto.setNom(utilisateur.getNom());
+        dto.setPrenom(utilisateur.getPrenom());
+        dto.setEmail(utilisateur.getEmail());
+        dto.setRole(utilisateur.getRole());
+        // pas de motDePasse !
 
-        UtilisateurDto utilisateurDto = new UtilisateurDto();
-        utilisateurDto.setId(utilisateur.getId());
-        utilisateurDto.setMotDePasse(utilisateur.getMotDePasse());
-        utilisateurDto.setEmail(utilisateur.getEmail());
-        utilisateurDto.setNom(utilisateur.getNom());
-        utilisateurDto.setPrenom(utilisateur.getPrenom());
-        utilisateurDto.setRole(utilisateur.getRole());
-
-        return utilisateurDto;
+        return dto;
     }
 
-    public Utilisateur toEntity(UtilisateurDto utilisateurDto) {
-        if (utilisateurDto == null) {
-            return null;
-        }
+    // RequestDto → Entité (ce qu'on reçoit du client)
+    public Utilisateur toEntity(UtilisateurRequestDto dto) {
+        if (dto == null) return null;
 
         Utilisateur utilisateur = new Utilisateur();
-        if (utilisateurDto.getId() != null) {
-            utilisateur.setId(utilisateurDto.getId());
-        }
-
-        utilisateur.setMotDePasse(utilisateurDto.getMotDePasse());
-        utilisateur.setEmail(utilisateurDto.getEmail());
-        utilisateur.setNom(utilisateurDto.getNom());
-        utilisateur.setPrenom(utilisateurDto.getPrenom());
-        utilisateur.setRole(utilisateurDto.getRole());
+        utilisateur.setNom(dto.getNom());
+        utilisateur.setPrenom(dto.getPrenom());
+        utilisateur.setEmail(dto.getEmail());
+        utilisateur.setMotDePasse(dto.getMotDePasse());
+        utilisateur.setRole(dto.getRole());
+        // pas d'id car c'est une création
 
         return utilisateur;
     }
-
 }
