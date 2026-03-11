@@ -3,6 +3,7 @@ package fr.ubo.kanban.common.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,6 +25,9 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
+                        // Routes publiques → pas besoin de token
+                        .requestMatchers(HttpMethod.POST, "/api/utilisateurs").permitAll()
+                        // Tout le reste nécessite un token
                         .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(oauth -> oauth
