@@ -9,7 +9,3 @@ Thumbs.db
 
 #Logs
 *.log
-
-# ctags
-tags
-.TAGS
