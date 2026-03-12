@@ -44,3 +44,7 @@ build/
 
 ### Env ###
 application-local.yaml
+
+#ctags 
+tags 
+.TAGS
