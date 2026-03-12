@@ -8,8 +8,24 @@
 !_TAG_FIELD_DESCRIPTION	name	/tag name/
 !_TAG_FIELD_DESCRIPTION	pattern	/pattern/
 !_TAG_FIELD_DESCRIPTION	typeref	/Type and name of a variable or typedef/
+!_TAG_FIELD_DESCRIPTION!XML	uri	/uri associated with name prefix/
 !_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
 !_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_KIND_DESCRIPTION!Ant	P,property	/properties(global)/
+!_TAG_KIND_DESCRIPTION!Ant	i,antfile	/antfiles/
+!_TAG_KIND_DESCRIPTION!Ant	p,project	/projects/
+!_TAG_KIND_DESCRIPTION!Ant	t,target	/targets/
+!_TAG_KIND_DESCRIPTION!DosBatch	l,label	/labels/
+!_TAG_KIND_DESCRIPTION!DosBatch	v,variable	/variables/
+!_TAG_KIND_DESCRIPTION!Java	a,annotation	/annotation declarations/
+!_TAG_KIND_DESCRIPTION!Java	c,class	/classes/
+!_TAG_KIND_DESCRIPTION!Java	e,enumConstant	/enum constants/
+!_TAG_KIND_DESCRIPTION!Java	f,field	/fields/
+!_TAG_KIND_DESCRIPTION!Java	g,enum	/enum types/
+!_TAG_KIND_DESCRIPTION!Java	i,interface	/interfaces/
+!_TAG_KIND_DESCRIPTION!Java	m,method	/methods/
+!_TAG_KIND_DESCRIPTION!Java	p,package	/packages/
+!_TAG_KIND_DESCRIPTION!JavaProperties	k,key	/keys/
 !_TAG_KIND_DESCRIPTION!Markdown	S,subsection	/level 2 sections/
 !_TAG_KIND_DESCRIPTION!Markdown	T,l4subsection	/level 4 sections/
 !_TAG_KIND_DESCRIPTION!Markdown	c,chapter	/chapters/
@@ -18,15 +34,409 @@
 !_TAG_KIND_DESCRIPTION!Markdown	s,section	/sections/
 !_TAG_KIND_DESCRIPTION!Markdown	t,subsubsection	/level 3 sections/
 !_TAG_KIND_DESCRIPTION!Markdown	u,l5subsection	/level 5 sections/
+!_TAG_KIND_DESCRIPTION!Maven2	a,artifactId	/artifact identifiers/
+!_TAG_KIND_DESCRIPTION!Maven2	g,groupId	/group identifiers/
+!_TAG_KIND_DESCRIPTION!Maven2	p,property	/properties/
+!_TAG_KIND_DESCRIPTION!Maven2	r,repositoryId	/repository identifiers/
+!_TAG_KIND_DESCRIPTION!Sh	a,alias	/aliases/
+!_TAG_KIND_DESCRIPTION!Sh	f,function	/functions/
+!_TAG_KIND_DESCRIPTION!Sh	h,heredoc	/label for here document/
+!_TAG_KIND_DESCRIPTION!Sh	s,script	/script files/
+!_TAG_KIND_DESCRIPTION!XML	i,id	/id attributes/
+!_TAG_KIND_DESCRIPTION!XML	n,nsprefix	/namespace prefixes/
+!_TAG_KIND_DESCRIPTION!XML	r,root	/root elements/
+!_TAG_KIND_DESCRIPTION!Yaml	a,anchor	/anchors/
 !_TAG_OUTPUT_EXCMD	mixed	/number, pattern, mixed, or combineV2/
 !_TAG_OUTPUT_FILESEP	slash	/slash or backslash/
 !_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
 !_TAG_OUTPUT_VERSION	0.0	/current.age/
+!_TAG_PARSER_VERSION!Ant	0.0	/current.age/
+!_TAG_PARSER_VERSION!DosBatch	0.0	/current.age/
+!_TAG_PARSER_VERSION!Java	0.0	/current.age/
+!_TAG_PARSER_VERSION!JavaProperties	0.0	/current.age/
 !_TAG_PARSER_VERSION!Markdown	1.1	/current.age/
+!_TAG_PARSER_VERSION!Maven2	0.0	/current.age/
+!_TAG_PARSER_VERSION!Sh	0.0	/current.age/
+!_TAG_PARSER_VERSION!XML	0.0	/current.age/
+!_TAG_PARSER_VERSION!Yaml	0.0	/current.age/
 !_TAG_PATTERN_LENGTH_LIMIT	96	/0 for no limit/
 !_TAG_PROC_CWD	/Users/batenguesanndo/Documents/TIIL-A/S8/Projets/kanban-manager/	//
 !_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
 !_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
 !_TAG_PROGRAM_URL	https://ctags.io/	/official site/
 !_TAG_PROGRAM_VERSION	6.1.0	//
+!_TAG_ROLE_DESCRIPTION!Ant!antfile	imported	/imported/
+!_TAG_ROLE_DESCRIPTION!Java!package	imported	/imported package/
+!_TAG_ROLE_DESCRIPTION!Maven2!artifactId	dependency	/dependency/
+!_TAG_ROLE_DESCRIPTION!Maven2!artifactId	parent	/parent/
+!_TAG_ROLE_DESCRIPTION!Maven2!groupId	dependency	/dependency/
+!_TAG_ROLE_DESCRIPTION!Maven2!groupId	parent	/parent/
+!_TAG_ROLE_DESCRIPTION!Sh!heredoc	endmarker	/end marker/
+!_TAG_ROLE_DESCRIPTION!Sh!script	loaded	/loaded/
+!_TAG_ROLE_DESCRIPTION!Yaml!anchor	alias	/alias/
+3AhYAu5O6WxnLmLGlaKCi92xXxP	backend-spring/.idea/workspace.xml	/^  <component name="ProjectId" id="3AhYAu5O6WxnLmLGlaKCi92xXxP" \/>$/;"	i
+ADMIN	backend-spring/src/main/java/fr/ubo/kanban/model/Role.java	/^    ADMIN, UTILISATEUR$/;"	e	enum:Role	file:
+ApiException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ApiException.java	/^    public ApiException(String message, int statusCode) {$/;"	m	class:ApiException
+ApiException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ApiException.java	/^public class ApiException extends RuntimeException {$/;"	c
+ApiResponse	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    private ApiResponse(boolean success, T data, String error) {$/;"	m	class:ApiResponse	file:
+ApiResponse	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^public class ApiResponse<T> {$/;"	c
+BASSE	backend-spring/src/main/java/fr/ubo/kanban/model/Priorite.java	/^    BASSE, MOYENNE, HAUTE$/;"	e	enum:Priorite	file:
+BackendSpringApplication	backend-spring/src/main/java/fr/ubo/kanban/BackendSpringApplication.java	/^public class BackendSpringApplication {$/;"	c
+BackendSpringApplicationTests	backend-spring/src/test/java/fr/ubo/kanban/BackendSpringApplicationTests.java	/^class BackendSpringApplicationTests {$/;"	c
+Colonne	backend-spring/src/main/java/fr/ubo/kanban/model/Colonne.java	/^public class Colonne {$/;"	c
+ColonneController	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^public class ColonneController {$/;"	c
+ColonneDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/colonne/ColonneDto.java	/^public class ColonneDto {$/;"	c
+ColonneMapper	backend-spring/src/main/java/fr/ubo/kanban/mappers/ColonneMapper.java	/^public class ColonneMapper {$/;"	c
+ColonneRepository	backend-spring/src/main/java/fr/ubo/kanban/repositories/ColonneRepository.java	/^public interface ColonneRepository extends JpaRepository<Colonne, Long> {$/;"	i
+ColonneService	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^public interface ColonneService {$/;"	i
+ColonneServiceImpl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^public class ColonneServiceImpl implements ColonneService {$/;"	c
+Commentaire	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^public class Commentaire {$/;"	c
+CommentaireController	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^public class CommentaireController {$/;"	c
+CommentaireDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^public class CommentaireDto {$/;"	c
+CommentaireMapper	backend-spring/src/main/java/fr/ubo/kanban/mappers/CommentaireMapper.java	/^public class CommentaireMapper {$/;"	c
+CommentaireRepository	backend-spring/src/main/java/fr/ubo/kanban/repositories/CommentaireRepository.java	/^public interface CommentaireRepository extends MongoRepository<Commentaire, String> {$/;"	i
+CommentaireRequestDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireRequestDto.java	/^public class CommentaireRequestDto {$/;"	c
+CommentaireResponseDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^public class CommentaireResponseDto {$/;"	c
+CommentaireService	backend-spring/src/main/java/fr/ubo/kanban/services/CommentaireService.java	/^public interface CommentaireService {$/;"	i
+CommentaireServiceImpl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^public class CommentaireServiceImpl implements CommentaireService {$/;"	c
+Default	backend-spring/.idea/workspace.xml	/^    <task active="true" id="Default" summary="Default task">$/;"	i
+END	backend-spring/mvnw	/^  cat >"$javaSource" <<-END$/;"	h
+ForbiddenException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ForbiddenException.java	/^    public ForbiddenException(String message) {$/;"	m	class:ForbiddenException
+ForbiddenException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ForbiddenException.java	/^public class ForbiddenException extends ApiException {$/;"	c
+Getting Started	backend-spring/HELP.md	/^# Getting Started$/;"	c
+GlobalExceptionHandler	backend-spring/src/main/java/fr/ubo/kanban/common/exception/GlobalExceptionHandler.java	/^public class GlobalExceptionHandler {$/;"	c
+Guides	backend-spring/HELP.md	/^### Guides$/;"	S	chapter:Getting Started
+HAUTE	backend-spring/src/main/java/fr/ubo/kanban/model/Priorite.java	/^    BASSE, MOYENNE, HAUTE$/;"	e	enum:Priorite	file:
+MOYENNE	backend-spring/src/main/java/fr/ubo/kanban/model/Priorite.java	/^    BASSE, MOYENNE, HAUTE$/;"	e	enum:Priorite	file:
+Maven Parent overrides	backend-spring/HELP.md	/^### Maven Parent overrides$/;"	S	chapter:Getting Started
+NotFoundException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/NotFoundException.java	/^    public NotFoundException(String message) {$/;"	m	class:NotFoundException
+NotFoundException	backend-spring/src/main/java/fr/ubo/kanban/common/exception/NotFoundException.java	/^public class NotFoundException extends ApiException {$/;"	c
+Priorite	backend-spring/src/main/java/fr/ubo/kanban/model/Priorite.java	/^public enum Priorite{$/;"	g
+Reference Documentation	backend-spring/HELP.md	/^### Reference Documentation$/;"	S	chapter:Getting Started
+Role	backend-spring/src/main/java/fr/ubo/kanban/model/Role.java	/^public enum Role {$/;"	g
+SecurityConfig	backend-spring/src/main/java/fr/ubo/kanban/common/security/SecurityConfig.java	/^public class SecurityConfig {$/;"	c
+Tableau	backend-spring/src/main/java/fr/ubo/kanban/model/Tableau.java	/^public class Tableau {$/;"	c
+TableauController	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^public class TableauController {$/;"	c
+TableauDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauDto.java	/^public class TableauDto {$/;"	c
+TableauMapper	backend-spring/src/main/java/fr/ubo/kanban/mappers/TableauMapper.java	/^public class TableauMapper {$/;"	c
+TableauRepository	backend-spring/src/main/java/fr/ubo/kanban/repositories/TableauRepository.java	/^public interface TableauRepository extends JpaRepository<Tableau, Long> {$/;"	i
+TableauRequestDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauRequestDto.java	/^public class TableauRequestDto {$/;"	c
+TableauResponseDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauResponseDto.java	/^public class TableauResponseDto {$/;"	c
+TableauService	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^public interface TableauService {$/;"	i
+TableauServiceImpl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^public class TableauServiceImpl implements TableauService {$/;"	c
+Tache	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^public class Tache {$/;"	c
+TacheController	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^public class TacheController {$/;"	c
+TacheDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^public class TacheDto {$/;"	c
+TacheMapper	backend-spring/src/main/java/fr/ubo/kanban/mappers/TacheMapper.java	/^public class TacheMapper {$/;"	c
+TacheRepository	backend-spring/src/main/java/fr/ubo/kanban/repositories/TacheRepository.java	/^public interface TacheRepository extends JpaRepository<Tache, Long> {$/;"	i
+TacheService	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^public interface TacheService {$/;"	i
+TacheServiceImpl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^public class TacheServiceImpl implements TacheService {$/;"	c
+UTILISATEUR	backend-spring/src/main/java/fr/ubo/kanban/model/Role.java	/^    ADMIN, UTILISATEUR$/;"	e	enum:Role	file:
+Utilisateur	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^public class Utilisateur {$/;"	c
+UtilisateurController	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^public class UtilisateurController {$/;"	c
+UtilisateurMapper	backend-spring/src/main/java/fr/ubo/kanban/mappers/UtilisateurMapper.java	/^public class UtilisateurMapper {$/;"	c
+UtilisateurRepository	backend-spring/src/main/java/fr/ubo/kanban/repositories/UtilisateurRepository.java	/^public interface UtilisateurRepository extends JpaRepository<Utilisateur, Long> { \/\/Long$/;"	i
+UtilisateurRequestDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^public class UtilisateurRequestDto {$/;"	c
+UtilisateurResponseDto	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^public class UtilisateurResponseDto {$/;"	c
+UtilisateurService	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^public interface UtilisateurService {$/;"	i
+UtilisateurServiceImpl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^public class UtilisateurServiceImpl implements UtilisateurService {$/;"	c
+__MVNW_CMD__	backend-spring/mvnw.cmd	/^  IF "%%A"=="MVN_CMD" (set __MVNW_CMD__=%%B) ELSE IF "%%B"=="" (echo %%A) ELSE (echo %%A=%%B)$/;"	v
+ajouterMembre	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<Void>> ajouterMembre($/;"	m	class:TableauController
+ajouterMembre	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    void ajouterMembre(Long idTableau, Long idUtilisateur);$/;"	m	interface:TableauService
+ajouterMembre	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public void ajouterMembre(Long idTableau, Long idUtilisateur) {$/;"	m	class:TableauServiceImpl
+backend-spring	backend-spring/pom.xml	/^	<artifactId>backend-spring<\/artifactId>$/;"	a	groupId:com.example
+clean	backend-spring/mvnw	/^  clean() { rm -rf -- "$TMP_DOWNLOAD_DIR"; }$/;"	f
+colonne	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private Colonne colonne;$/;"	f	class:Tache	file:
+colonneMapper	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    private final ColonneMapper colonneMapper;$/;"	f	class:ColonneServiceImpl	file:
+colonneRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    private final ColonneRepository colonneRepository;$/;"	f	class:ColonneServiceImpl	file:
+colonneRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    private final ColonneRepository colonneRepository;$/;"	f	class:TacheServiceImpl	file:
+colonneService	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    private final ColonneService colonneService;$/;"	f	class:ColonneController	file:
+com.example	backend-spring/pom.xml	/^	<groupId>com.example<\/groupId>$/;"	g
+commentaireMapper	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^    private final CommentaireMapper commentaireMapper;$/;"	f	class:CommentaireServiceImpl	file:
+commentaireRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^    private final CommentaireRepository commentaireRepository;$/;"	f	class:CommentaireServiceImpl	file:
+commentaireService	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^    private final CommentaireService commentaireService;$/;"	f	class:CommentaireController	file:
+contenu	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^    private String contenu;$/;"	f	class:CommentaireDto	file:
+contenu	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireRequestDto.java	/^    private String contenu;$/;"	f	class:CommentaireRequestDto	file:
+contenu	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^    private String contenu;$/;"	f	class:CommentaireResponseDto	file:
+contenu	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^    private String contenu;$/;"	f	class:Commentaire	file:
+contextLoads	backend-spring/src/test/java/fr/ubo/kanban/BackendSpringApplicationTests.java	/^	void contextLoads() {$/;"	m	class:BackendSpringApplicationTests
+create	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^    public ResponseEntity<ApiResponse<CommentaireResponseDto>> create($/;"	m	class:CommentaireController
+create	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<TableauResponseDto>> create(@RequestBody TableauRequestDto/;"	m	class:TableauController
+create	backend-spring/src/main/java/fr/ubo/kanban/services/CommentaireService.java	/^    CommentaireResponseDto create(Long idTache, CommentaireRequestDto dto);$/;"	m	interface:CommentaireService
+create	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    TableauResponseDto create(TableauRequestDto dto);$/;"	m	interface:TableauService
+create	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^    public CommentaireResponseDto create(Long idTache, CommentaireRequestDto dto) {$/;"	m	class:CommentaireServiceImpl
+create	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public TableauResponseDto create(TableauRequestDto dto) {$/;"	m	class:TableauServiceImpl
+data	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    private T data;$/;"	f	class:ApiResponse	file:
+dateCreation	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^    private LocalDateTime dateCreation;$/;"	f	class:CommentaireDto	file:
+dateCreation	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^    private LocalDateTime dateCreation;$/;"	f	class:CommentaireResponseDto	file:
+dateCreation	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^    private LocalDateTime dateCreation;$/;"	f	class:Commentaire	file:
+dateLimit	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private LocalDate dateLimit;$/;"	f	class:TacheDto	file:
+dateLimit	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private LocalDate dateLimit;$/;"	f	class:Tache	file:
+de1627db-84f3-4449-a99a-3a52e933b0ba	backend-spring/.idea/workspace.xml	/^      <changelist id="de1627db-84f3-4449-a99a-3a52e933b0ba" name="Changes" comment="" \/>$/;"	i
+de1627db-84f3-4449-a99a-3a52e933b0ba	backend-spring/.idea/workspace.xml	/^    <list default="true" id="de1627db-84f3-4449-a99a-3a52e933b0ba" name="Changes" comment="" \/>$/;"	i
+delete	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable String id) {$/;"	m	class:CommentaireController
+delete	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<Void>> delete(@PathVariable Long id) {$/;"	m	class:TableauController
+delete	backend-spring/src/main/java/fr/ubo/kanban/services/CommentaireService.java	/^    void delete(String id);$/;"	m	interface:CommentaireService
+delete	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    void delete(Long id);$/;"	m	interface:TableauService
+delete	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^    public void delete(String id) {$/;"	m	class:CommentaireServiceImpl
+delete	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public void delete(Long id) {$/;"	m	class:TableauServiceImpl
+deleteAllByIdTache	backend-spring/src/main/java/fr/ubo/kanban/repositories/CommentaireRepository.java	/^    void deleteAllByIdTache(Long idTache);$/;"	m	interface:CommentaireRepository
+deleteColonne	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public void deleteColonne(@PathVariable Long id) {$/;"	m	class:ColonneController
+deleteColonne	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    boolean deleteColonne(Long id);$/;"	m	interface:ColonneService
+deleteColonne	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public boolean deleteColonne(Long id) {$/;"	m	class:ColonneServiceImpl
+deleteTache	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public void deleteTache(@PathVariable Long id) {$/;"	m	class:TacheController
+deleteTache	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    boolean deleteTache(Long id);$/;"	m	interface:TacheService
+deleteTache	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public boolean deleteTache(Long id) {$/;"	m	class:TacheServiceImpl
+deleteUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    public void deleteUtilisateur(@PathVariable Long id) {$/;"	m	class:UtilisateurController
+deleteUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^    boolean deleteUtilisateur(Long id);$/;"	m	interface:UtilisateurService
+deleteUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    public boolean deleteUtilisateur(Long id) {$/;"	m	class:UtilisateurServiceImpl
+description	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private String description;$/;"	f	class:TacheDto	file:
+description	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private String description;$/;"	f	class:Tache	file:
+die	backend-spring/mvnw	/^die() {$/;"	f
+distributionType	backend-spring/.mvn/wrapper/maven-wrapper.properties	/^distributionType=only-script$/;"	k
+distributionUrl	backend-spring/.mvn/wrapper/maven-wrapper.properties	/^distributionUrl=https:\/\/repo.maven.apache.org\/maven2\/org\/apache\/maven\/apache-maven\/3.9.1/;"	k
+email	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^    private String email;$/;"	f	class:UtilisateurRequestDto	file:
+email	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^    private String email;$/;"	f	class:UtilisateurResponseDto	file:
+email	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private String email;$/;"	f	class:Utilisateur	file:
+error	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    private String error;$/;"	f	class:ApiResponse	file:
+error	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public static <T> ApiResponse<T> error(String message) {$/;"	m	class:ApiResponse
+exec_maven	backend-spring/mvnw	/^exec_maven() {$/;"	f
+findAll	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<List<TableauResponseDto>>> findAll() {$/;"	m	class:TableauController
+findAll	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    List<TableauResponseDto> findAll();$/;"	m	interface:TableauService
+findAll	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public List<TableauResponseDto> findAll() {$/;"	m	class:TableauServiceImpl
+findByColonneId	backend-spring/src/main/java/fr/ubo/kanban/repositories/TacheRepository.java	/^    List<Tache> findByColonneId(Long colonneId);$/;"	m	interface:TacheRepository
+findById	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<TableauResponseDto>> findById(@PathVariable Long id) {$/;"	m	class:TableauController
+findById	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    TableauResponseDto findById(Long id);$/;"	m	interface:TableauService
+findById	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public TableauResponseDto findById(Long id) {$/;"	m	class:TableauServiceImpl
+findByIdTache	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^    public ResponseEntity<ApiResponse<List<CommentaireResponseDto>>> findByIdTache($/;"	m	class:CommentaireController
+findByIdTache	backend-spring/src/main/java/fr/ubo/kanban/repositories/CommentaireRepository.java	/^    List<Commentaire> findByIdTache(Long idTache);$/;"	m	interface:CommentaireRepository
+findByIdTache	backend-spring/src/main/java/fr/ubo/kanban/services/CommentaireService.java	/^    List<CommentaireResponseDto> findByIdTache(Long idTache);$/;"	m	interface:CommentaireService
+findByIdTache	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^    public List<CommentaireResponseDto> findByIdTache(Long idTache) {$/;"	m	class:CommentaireServiceImpl
+findByTableauId	backend-spring/src/main/java/fr/ubo/kanban/repositories/ColonneRepository.java	/^    List<Colonne> findByTableauId(Long tableauId);$/;"	m	interface:ColonneRepository
+fr.ubo.kanban	backend-spring/src/main/java/fr/ubo/kanban/BackendSpringApplication.java	/^package fr.ubo.kanban;$/;"	p
+fr.ubo.kanban	backend-spring/src/test/java/fr/ubo/kanban/BackendSpringApplicationTests.java	/^package fr.ubo.kanban;$/;"	p
+fr.ubo.kanban.common.exception	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ApiException.java	/^package fr.ubo.kanban.common.exception;$/;"	p
+fr.ubo.kanban.common.exception	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ForbiddenException.java	/^package fr.ubo.kanban.common.exception;$/;"	p
+fr.ubo.kanban.common.exception	backend-spring/src/main/java/fr/ubo/kanban/common/exception/GlobalExceptionHandler.java	/^package fr.ubo.kanban.common.exception;$/;"	p
+fr.ubo.kanban.common.exception	backend-spring/src/main/java/fr/ubo/kanban/common/exception/NotFoundException.java	/^package fr.ubo.kanban.common.exception;$/;"	p
+fr.ubo.kanban.common.response	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^package fr.ubo.kanban.common.response;$/;"	p
+fr.ubo.kanban.common.security	backend-spring/src/main/java/fr/ubo/kanban/common/security/SecurityConfig.java	/^package fr.ubo.kanban.common.security;$/;"	p
+fr.ubo.kanban.controllers	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^package fr.ubo.kanban.controllers;$/;"	p
+fr.ubo.kanban.controllers	backend-spring/src/main/java/fr/ubo/kanban/controllers/CommentaireController.java	/^package fr.ubo.kanban.controllers;$/;"	p
+fr.ubo.kanban.controllers	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^package fr.ubo.kanban.controllers;$/;"	p
+fr.ubo.kanban.controllers	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^package fr.ubo.kanban.controllers;$/;"	p
+fr.ubo.kanban.controllers	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^package fr.ubo.kanban.controllers;$/;"	p
+fr.ubo.kanban.dtos.colonne	backend-spring/src/main/java/fr/ubo/kanban/dtos/colonne/ColonneDto.java	/^package fr.ubo.kanban.dtos.colonne;$/;"	p
+fr.ubo.kanban.dtos.commentaire	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^package fr.ubo.kanban.dtos.commentaire;$/;"	p
+fr.ubo.kanban.dtos.commentaire	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireRequestDto.java	/^package fr.ubo.kanban.dtos.commentaire;$/;"	p
+fr.ubo.kanban.dtos.commentaire	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^package fr.ubo.kanban.dtos.commentaire;$/;"	p
+fr.ubo.kanban.dtos.tableau	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauDto.java	/^package fr.ubo.kanban.dtos.tableau;$/;"	p
+fr.ubo.kanban.dtos.tableau	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauRequestDto.java	/^package fr.ubo.kanban.dtos.tableau;$/;"	p
+fr.ubo.kanban.dtos.tableau	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauResponseDto.java	/^package fr.ubo.kanban.dtos.tableau;$/;"	p
+fr.ubo.kanban.dtos.tache	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^package fr.ubo.kanban.dtos.tache;$/;"	p
+fr.ubo.kanban.dtos.utilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^package fr.ubo.kanban.dtos.utilisateur;$/;"	p
+fr.ubo.kanban.dtos.utilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^package fr.ubo.kanban.dtos.utilisateur;$/;"	p
+fr.ubo.kanban.mappers	backend-spring/src/main/java/fr/ubo/kanban/mappers/ColonneMapper.java	/^package fr.ubo.kanban.mappers;$/;"	p
+fr.ubo.kanban.mappers	backend-spring/src/main/java/fr/ubo/kanban/mappers/CommentaireMapper.java	/^package fr.ubo.kanban.mappers;$/;"	p
+fr.ubo.kanban.mappers	backend-spring/src/main/java/fr/ubo/kanban/mappers/TableauMapper.java	/^package fr.ubo.kanban.mappers;$/;"	p
+fr.ubo.kanban.mappers	backend-spring/src/main/java/fr/ubo/kanban/mappers/TacheMapper.java	/^package fr.ubo.kanban.mappers;$/;"	p
+fr.ubo.kanban.mappers	backend-spring/src/main/java/fr/ubo/kanban/mappers/UtilisateurMapper.java	/^package fr.ubo.kanban.mappers;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Colonne.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Priorite.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Role.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Tableau.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^package fr.ubo.kanban.model;$/;"	p
+fr.ubo.kanban.model.mongoDB	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^package fr.ubo.kanban.model.mongoDB;$/;"	p
+fr.ubo.kanban.repositories	backend-spring/src/main/java/fr/ubo/kanban/repositories/ColonneRepository.java	/^package fr.ubo.kanban.repositories;$/;"	p
+fr.ubo.kanban.repositories	backend-spring/src/main/java/fr/ubo/kanban/repositories/CommentaireRepository.java	/^package fr.ubo.kanban.repositories;$/;"	p
+fr.ubo.kanban.repositories	backend-spring/src/main/java/fr/ubo/kanban/repositories/TableauRepository.java	/^package fr.ubo.kanban.repositories;$/;"	p
+fr.ubo.kanban.repositories	backend-spring/src/main/java/fr/ubo/kanban/repositories/TacheRepository.java	/^package fr.ubo.kanban.repositories;$/;"	p
+fr.ubo.kanban.repositories	backend-spring/src/main/java/fr/ubo/kanban/repositories/UtilisateurRepository.java	/^package fr.ubo.kanban.repositories;$/;"	p
+fr.ubo.kanban.services	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^package fr.ubo.kanban.services;$/;"	p
+fr.ubo.kanban.services	backend-spring/src/main/java/fr/ubo/kanban/services/CommentaireService.java	/^package fr.ubo.kanban.services;$/;"	p
+fr.ubo.kanban.services	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^package fr.ubo.kanban.services;$/;"	p
+fr.ubo.kanban.services	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^package fr.ubo.kanban.services;$/;"	p
+fr.ubo.kanban.services	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^package fr.ubo.kanban.services;$/;"	p
+fr.ubo.kanban.services.impl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^package fr.ubo.kanban.services.impl;$/;"	p
+fr.ubo.kanban.services.impl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/CommentaireServiceImpl.java	/^package fr.ubo.kanban.services.impl;$/;"	p
+fr.ubo.kanban.services.impl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^package fr.ubo.kanban.services.impl;$/;"	p
+fr.ubo.kanban.services.impl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^package fr.ubo.kanban.services.impl;$/;"	p
+fr.ubo.kanban.services.impl	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^package fr.ubo.kanban.services.impl;$/;"	p
+getAllColonnes	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public List<ColonneDto> getAllColonnes() {$/;"	m	class:ColonneController
+getAllColonnes	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    List<ColonneDto> getAllColonnes();$/;"	m	interface:ColonneService
+getAllColonnes	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public List<ColonneDto> getAllColonnes() {$/;"	m	class:ColonneServiceImpl
+getAllTaches	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public List<TacheDto> getAllTaches() {$/;"	m	class:TacheController
+getAllTaches	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    List<TacheDto> getAllTaches();$/;"	m	interface:TacheService
+getAllTaches	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public List<TacheDto> getAllTaches() {$/;"	m	class:TacheServiceImpl
+getAllUtilisateurs	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^    List<UtilisateurResponseDto> getAllUtilisateurs();$/;"	m	interface:UtilisateurService
+getAllUtilisateurs	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    public List<UtilisateurResponseDto> getAllUtilisateurs() {$/;"	m	class:UtilisateurServiceImpl
+getColonneById	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public ColonneDto getColonneById(@PathVariable Long id) {$/;"	m	class:ColonneController
+getColonneById	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    ColonneDto getColonneById(Long id);$/;"	m	interface:ColonneService
+getColonneById	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public ColonneDto getColonneById(Long id) {$/;"	m	class:ColonneServiceImpl
+getColonnesByTableau	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public List<ColonneDto> getColonnesByTableau(@PathVariable Long idTableau) {$/;"	m	class:ColonneController
+getColonnesByTableauId	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    List<ColonneDto> getColonnesByTableauId(Long idTableau);$/;"	m	interface:ColonneService
+getColonnesByTableauId	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public List<ColonneDto> getColonnesByTableauId(Long idTableau) {$/;"	m	class:ColonneServiceImpl
+getData	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public T getData() { return data; }$/;"	m	class:ApiResponse
+getError	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public String getError() { return error; }$/;"	m	class:ApiResponse
+getStatusCode	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ApiException.java	/^    public int getStatusCode() { return statusCode; }$/;"	m	class:ApiException
+getTacheById	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public TacheDto getTacheById(@PathVariable Long id) {$/;"	m	class:TacheController
+getTacheById	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    TacheDto getTacheById(Long id);$/;"	m	interface:TacheService
+getTacheById	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public TacheDto getTacheById(Long id) {$/;"	m	class:TacheServiceImpl
+getTachesByColonne	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public List<TacheDto> getTachesByColonne(@PathVariable Long idColonne) {$/;"	m	class:TacheController
+getTachesByColonneId	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    List<TacheDto> getTachesByColonneId(Long idColonne);$/;"	m	interface:TacheService
+getTachesByColonneId	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public List<TacheDto> getTachesByColonneId(Long idColonne) {$/;"	m	class:TacheServiceImpl
+getTimestamp	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public LocalDateTime getTimestamp() { return timestamp; }$/;"	m	class:ApiResponse
+getUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    public UtilisateurResponseDto getUtilisateur(@PathVariable Long id) {$/;"	m	class:UtilisateurController
+getUtilisateurById	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^    UtilisateurResponseDto getUtilisateurById(Long id);$/;"	m	interface:UtilisateurService
+getUtilisateurById	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    public UtilisateurResponseDto getUtilisateurById(Long id) {$/;"	m	class:UtilisateurServiceImpl
+getUtilisateurs	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    public List<UtilisateurResponseDto> getUtilisateurs() {$/;"	m	class:UtilisateurController
+handleForbidden	backend-spring/src/main/java/fr/ubo/kanban/common/exception/GlobalExceptionHandler.java	/^    public ResponseEntity<ApiResponse<Void>> handleForbidden(ForbiddenException ex) {$/;"	m	class:GlobalExceptionHandler
+handleGeneric	backend-spring/src/main/java/fr/ubo/kanban/common/exception/GlobalExceptionHandler.java	/^    public ResponseEntity<ApiResponse<Void>> handleGeneric(Exception ex) {$/;"	m	class:GlobalExceptionHandler
+handleNotFound	backend-spring/src/main/java/fr/ubo/kanban/common/exception/GlobalExceptionHandler.java	/^    public ResponseEntity<ApiResponse<Void>> handleNotFound(NotFoundException ex) {$/;"	m	class:GlobalExceptionHandler
+hash_string	backend-spring/mvnw	/^hash_string() {$/;"	f
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/colonne/ColonneDto.java	/^    private Long id;$/;"	f	class:ColonneDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^    private String id;$/;"	f	class:CommentaireDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^    private String id;$/;"	f	class:CommentaireResponseDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauDto.java	/^    private Long id;$/;"	f	class:TableauDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauResponseDto.java	/^    private Long id;$/;"	f	class:TableauResponseDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private Long id;$/;"	f	class:TacheDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^    private Long id;$/;"	f	class:UtilisateurResponseDto	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/model/Colonne.java	/^    private Long id;$/;"	f	class:Colonne	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/model/Tableau.java	/^    private Long id;$/;"	f	class:Tableau	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private Long id;$/;"	f	class:Tache	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private Long id;$/;"	f	class:Utilisateur	file:
+id	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^    private String id;$/;"	f	class:Commentaire	file:
+idColonne	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private Long idColonne;$/;"	f	class:TacheDto	file:
+idTableau	backend-spring/src/main/java/fr/ubo/kanban/dtos/colonne/ColonneDto.java	/^    private Long idTableau;$/;"	f	class:ColonneDto	file:
+idTache	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^    private Long idTache;$/;"	f	class:CommentaireDto	file:
+idTache	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^    private Long idTache;$/;"	f	class:CommentaireResponseDto	file:
+idTache	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^    private Long idTache;$/;"	f	class:Commentaire	file:
+idUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireDto.java	/^    private Long idUtilisateur;$/;"	f	class:CommentaireDto	file:
+idUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireRequestDto.java	/^    private Long idUtilisateur;$/;"	f	class:CommentaireRequestDto	file:
+idUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/commentaire/CommentaireResponseDto.java	/^    private Long idUtilisateur;$/;"	f	class:CommentaireResponseDto	file:
+idUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private Long idUtilisateur;$/;"	f	class:TacheDto	file:
+idUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/model/mongoDB/Commentaire.java	/^    private Long idUtilisateur;$/;"	f	class:Commentaire	file:
+isSuccess	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public boolean isSuccess() { return success; }$/;"	m	class:ApiResponse
+java.version	backend-spring/pom.xml	/^		<java.version>17<\/java.version>$/;"	p
+jwksUri	backend-spring/src/main/java/fr/ubo/kanban/common/security/SecurityConfig.java	/^    private String jwksUri;$/;"	f	class:SecurityConfig	file:
+jwt.expiration	backend-spring/src/main/resources/application.properties	/^jwt.expiration=86400000$/;"	k
+jwt.expiration	backend-spring/target/classes/application.properties	/^jwt.expiration=86400000$/;"	k
+jwt.secret	backend-spring/src/main/resources/application.properties	/^jwt.secret=kanban-super-secret-key$/;"	k
+jwt.secret	backend-spring/target/classes/application.properties	/^jwt.secret=kanban-super-secret-key$/;"	k
+jwtDecoder	backend-spring/src/main/java/fr/ubo/kanban/common/security/SecurityConfig.java	/^    public JwtDecoder jwtDecoder() {$/;"	m	class:SecurityConfig
 kanban-manager	README.md	/^# kanban-manager$/;"	c
+logging.level.org.springframework.security	backend-spring/src/main/resources/application.properties	/^logging.level.org.springframework.security=DEBUG$/;"	k
+logging.level.org.springframework.security	backend-spring/target/classes/application.properties	/^logging.level.org.springframework.security=DEBUG/;"	k
+main	backend-spring/src/main/java/fr/ubo/kanban/BackendSpringApplication.java	/^	public static void main(String[] args) {$/;"	m	class:BackendSpringApplication
+motDePasse	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^    private String motDePasse;$/;"	f	class:UtilisateurRequestDto	file:
+motDePasse	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private String motDePasse;$/;"	f	class:Utilisateur	file:
+native_path	backend-spring/mvnw	/^  native_path() { cygpath --path --windows "$1"; }$/;"	f
+native_path	backend-spring/mvnw	/^native_path() { printf %s\\\\n "$1"; }$/;"	f
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/colonne/ColonneDto.java	/^    private String nom;$/;"	f	class:ColonneDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauDto.java	/^    private String nom;$/;"	f	class:TableauDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauRequestDto.java	/^    private String nom;$/;"	f	class:TableauRequestDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauResponseDto.java	/^    private String nom;$/;"	f	class:TableauResponseDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^    private String nom;$/;"	f	class:UtilisateurRequestDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^    private String nom;$/;"	f	class:UtilisateurResponseDto	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/model/Colonne.java	/^    private String nom;$/;"	f	class:Colonne	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/model/Tableau.java	/^    private String nom;$/;"	f	class:Tableau	file:
+nom	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private String nom;$/;"	f	class:Utilisateur	file:
+nsd3c98b470101	backend-spring/pom.xml	/^	xsi:schemaLocation="http:\/\/maven.apache.org\/POM\/4.0.0 https:\/\/maven.apache.org\/xsd\/mave/;"	n	uri:http://maven.apache.org/POM/4.0.0
+ok	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    public static <T> ApiResponse<T> ok(T data) {$/;"	m	class:ApiResponse
+prenom	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^    private String prenom;$/;"	f	class:UtilisateurRequestDto	file:
+prenom	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^    private String prenom;$/;"	f	class:UtilisateurResponseDto	file:
+prenom	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private String prenom;$/;"	f	class:Utilisateur	file:
+priorite	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private Priorite priorite;$/;"	f	class:TacheDto	file:
+priorite	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private Priorite priorite;$/;"	f	class:Tache	file:
+retirerMembre	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<Void>> retirerMembre($/;"	m	class:TableauController
+retirerMembre	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    void retirerMembre(Long idTableau, Long idUtilisateur);$/;"	m	interface:TableauService
+retirerMembre	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public void retirerMembre(Long idTableau, Long idUtilisateur) {$/;"	m	class:TableauServiceImpl
+role	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurRequestDto.java	/^    private Role role;$/;"	f	class:UtilisateurRequestDto	file:
+role	backend-spring/src/main/java/fr/ubo/kanban/dtos/utilisateur/UtilisateurResponseDto.java	/^    private Role role;$/;"	f	class:UtilisateurResponseDto	file:
+role	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private Role role;$/;"	f	class:Utilisateur	file:
+saveColonne	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public ColonneDto saveColonne(@RequestBody ColonneDto dto) {$/;"	m	class:ColonneController
+saveColonne	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    ColonneDto saveColonne(ColonneDto dto);$/;"	m	interface:ColonneService
+saveColonne	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public ColonneDto saveColonne(ColonneDto dto) {$/;"	m	class:ColonneServiceImpl
+saveTache	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public TacheDto saveTache(@RequestBody TacheDto dto) {$/;"	m	class:TacheController
+saveTache	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    TacheDto saveTache(TacheDto dto);$/;"	m	interface:TacheService
+saveTache	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public TacheDto saveTache(TacheDto dto) {$/;"	m	class:TacheServiceImpl
+saveUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    public UtilisateurResponseDto saveUtilisateur(@RequestBody UtilisateurRequestDto dto) {$/;"	m	class:UtilisateurController
+saveUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^    UtilisateurResponseDto saveUtilisateur(UtilisateurRequestDto dto);$/;"	m	interface:UtilisateurService
+saveUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    public UtilisateurResponseDto saveUtilisateur(UtilisateurRequestDto dto) {$/;"	m	class:UtilisateurServiceImpl
+securityFilterChain	backend-spring/src/main/java/fr/ubo/kanban/common/security/SecurityConfig.java	/^    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {$/;"	m	class:SecurityConfig
+server.port	backend-spring/src/main/resources/application.properties	/^server.port=8080$/;"	k
+server.port	backend-spring/target/classes/application.properties	/^server.port=8080$/;"	k
+set_java_home	backend-spring/mvnw	/^set_java_home() {$/;"	f
+spring.application.name	backend-spring/src/main/resources/application.properties	/^spring.application.name=backend-spring$/;"	k
+spring.application.name	backend-spring/target/classes/application.properties	/^spring.application.name=backend-spring$/;"	k
+spring.data.mongodb.uri	backend-spring/src/main/resources/application.properties	/^spring.data.mongodb.uri=mongodb:\/\/localhost:27017\/kanban_mongo$/;"	k
+spring.data.mongodb.uri	backend-spring/target/classes/application.properties	/^spring.data.mongodb.uri=mongodb:\/\/localhost:27017\/kanban_mongo$/;"	k
+spring.datasource.driver-class-name	backend-spring/src/main/resources/application.properties	/^spring.datasource.driver-class-name=org.mariadb.jdbc.Driver$/;"	k
+spring.datasource.driver-class-name	backend-spring/target/classes/application.properties	/^spring.datasource.driver-class-name=org.mariadb.jdbc.Driver$/;"	k
+spring.datasource.password	backend-spring/src/main/resources/application.properties	/^spring.datasource.password=root$/;"	k
+spring.datasource.password	backend-spring/target/classes/application.properties	/^spring.datasource.password=root$/;"	k
+spring.datasource.url	backend-spring/src/main/resources/application.properties	/^spring.datasource.url=jdbc:mariadb:\/\/localhost:3306\/kanban_db?createDatabaseIfNotExist=true$/;"	k
+spring.datasource.url	backend-spring/target/classes/application.properties	/^spring.datasource.url=jdbc:mariadb:\/\/localhost:3307\/kanban_db?createDatabaseIfNotExist=true$/;"	k
+spring.datasource.username	backend-spring/src/main/resources/application.properties	/^spring.datasource.username=root$/;"	k
+spring.datasource.username	backend-spring/target/classes/application.properties	/^spring.datasource.username=root$/;"	k
+spring.jpa.hibernate.ddl-auto	backend-spring/src/main/resources/application.properties	/^spring.jpa.hibernate.ddl-auto=update$/;"	k
+spring.jpa.hibernate.ddl-auto	backend-spring/target/classes/application.properties	/^spring.jpa.hibernate.ddl-auto=update$/;"	k
+spring.jpa.hibernate.naming.physical-strategy	backend-spring/target/classes/application.properties	/^spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.PhysicalNamingStra/;"	k
+spring.jpa.open-in-view	backend-spring/src/main/resources/application.properties	/^spring.jpa.open-in-view=false$/;"	k
+spring.jpa.open-in-view	backend-spring/target/classes/application.properties	/^spring.jpa.open-in-view=false$/;"	k
+spring.jpa.properties.hibernate.format_sql	backend-spring/src/main/resources/application.properties	/^spring.jpa.properties.hibernate.format_sql=true$/;"	k
+spring.jpa.properties.hibernate.format_sql	backend-spring/target/classes/application.properties	/^spring.jpa.properties.hibernate.format_sql=true$/;"	k
+spring.jpa.show-sql	backend-spring/src/main/resources/application.properties	/^spring.jpa.show-sql=true$/;"	k
+spring.jpa.show-sql	backend-spring/target/classes/application.properties	/^spring.jpa.show-sql=true$/;"	k
+spring.security.oauth2.resourceserver.jwt.jwk-set-uri	backend-spring/src/main/resources/application.properties	/^spring.security.oauth2.resourceserver.jwt.jwk-set-uri=http:\/\/localhost:3000\/.well-known\/jwks/;"	k
+statusCode	backend-spring/src/main/java/fr/ubo/kanban/common/exception/ApiException.java	/^    private final int statusCode;$/;"	f	class:ApiException	file:
+success	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    private boolean success;$/;"	f	class:ApiResponse	file:
+tableau	backend-spring/src/main/java/fr/ubo/kanban/model/Colonne.java	/^    private Tableau tableau;$/;"	f	class:Colonne	file:
+tableauMapper	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    private final TableauMapper tableauMapper;$/;"	f	class:TableauServiceImpl	file:
+tableauRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    private final TableauRepository tableauRepository;$/;"	f	class:ColonneServiceImpl	file:
+tableauRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    private final TableauRepository tableauRepository;$/;"	f	class:TableauServiceImpl	file:
+tableauService	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    private final TableauService tableauService;$/;"	f	class:TableauController	file:
+tableaux	backend-spring/src/main/java/fr/ubo/kanban/model/Utilisateur.java	/^    private List<Tableau> tableaux = new ArrayList<>();$/;"	f	class:Utilisateur	file:
+tacheMapper	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    private final TacheMapper tacheMapper;$/;"	f	class:TacheServiceImpl	file:
+tacheRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    private final TacheRepository tacheRepository;$/;"	f	class:TacheServiceImpl	file:
+tacheService	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    private final TacheService tacheService;$/;"	f	class:TacheController	file:
+timestamp	backend-spring/src/main/java/fr/ubo/kanban/common/response/ApiResponse.java	/^    private LocalDateTime timestamp;$/;"	f	class:ApiResponse	file:
+titre	backend-spring/src/main/java/fr/ubo/kanban/dtos/tache/TacheDto.java	/^    private String titre;$/;"	f	class:TacheDto	file:
+titre	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private String titre;$/;"	f	class:Tache	file:
+toDto	backend-spring/src/main/java/fr/ubo/kanban/mappers/ColonneMapper.java	/^    public ColonneDto toDto(Colonne colonne) {$/;"	m	class:ColonneMapper
+toDto	backend-spring/src/main/java/fr/ubo/kanban/mappers/TacheMapper.java	/^    public TacheDto toDto(Tache tache) {$/;"	m	class:TacheMapper
+toEntity	backend-spring/src/main/java/fr/ubo/kanban/mappers/ColonneMapper.java	/^    public Colonne toEntity(ColonneDto dto, Tableau tableau) {$/;"	m	class:ColonneMapper
+toEntity	backend-spring/src/main/java/fr/ubo/kanban/mappers/CommentaireMapper.java	/^    public Commentaire toEntity(CommentaireRequestDto dto, Long idTache) {$/;"	m	class:CommentaireMapper
+toEntity	backend-spring/src/main/java/fr/ubo/kanban/mappers/TableauMapper.java	/^    public Tableau toEntity(TableauRequestDto dto) {$/;"	m	class:TableauMapper
+toEntity	backend-spring/src/main/java/fr/ubo/kanban/mappers/TacheMapper.java	/^    public Tache toEntity(TacheDto dto, Colonne colonne, Utilisateur utilisateur) {$/;"	m	class:TacheMapper
+toEntity	backend-spring/src/main/java/fr/ubo/kanban/mappers/UtilisateurMapper.java	/^    public Utilisateur toEntity(UtilisateurRequestDto dto) {$/;"	m	class:UtilisateurMapper
+toResponseDto	backend-spring/src/main/java/fr/ubo/kanban/mappers/CommentaireMapper.java	/^    public CommentaireResponseDto toResponseDto(Commentaire commentaire) {$/;"	m	class:CommentaireMapper
+toResponseDto	backend-spring/src/main/java/fr/ubo/kanban/mappers/TableauMapper.java	/^    public TableauResponseDto toResponseDto(Tableau tableau) {$/;"	m	class:TableauMapper
+toResponseDto	backend-spring/src/main/java/fr/ubo/kanban/mappers/UtilisateurMapper.java	/^    public UtilisateurResponseDto toResponseDto(Utilisateur utilisateur) {$/;"	m	class:UtilisateurMapper
+trim	backend-spring/mvnw	/^trim() {$/;"	f
+update	backend-spring/src/main/java/fr/ubo/kanban/controllers/TableauController.java	/^    public ResponseEntity<ApiResponse<TableauResponseDto>> update($/;"	m	class:TableauController
+update	backend-spring/src/main/java/fr/ubo/kanban/services/TableauService.java	/^    TableauResponseDto update(Long id, TableauRequestDto dto);$/;"	m	interface:TableauService
+update	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    public TableauResponseDto update(Long id, TableauRequestDto dto) {$/;"	m	class:TableauServiceImpl
+updateColonne	backend-spring/src/main/java/fr/ubo/kanban/controllers/ColonneController.java	/^    public ColonneDto updateColonne(@PathVariable Long id, @RequestBody ColonneDto dto) {$/;"	m	class:ColonneController
+updateColonne	backend-spring/src/main/java/fr/ubo/kanban/services/ColonneService.java	/^    ColonneDto updateColonne(Long id, ColonneDto dto);$/;"	m	interface:ColonneService
+updateColonne	backend-spring/src/main/java/fr/ubo/kanban/services/impl/ColonneServiceImpl.java	/^    public ColonneDto updateColonne(Long id, ColonneDto dto) {$/;"	m	class:ColonneServiceImpl
+updateTache	backend-spring/src/main/java/fr/ubo/kanban/controllers/TacheController.java	/^    public TacheDto updateTache(@PathVariable Long id, @RequestBody TacheDto dto) {$/;"	m	class:TacheController
+updateTache	backend-spring/src/main/java/fr/ubo/kanban/services/TacheService.java	/^    TacheDto updateTache(Long id, TacheDto dto);$/;"	m	interface:TacheService
+updateTache	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    public TacheDto updateTache(Long id, TacheDto dto) {$/;"	m	class:TacheServiceImpl
+updateUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    public UtilisateurResponseDto updateUtilisateur(@PathVariable Long id, @RequestBody Utilisat/;"	m	class:UtilisateurController
+updateUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/UtilisateurService.java	/^    UtilisateurResponseDto updateUtilisateur(Long id, UtilisateurRequestDto dto);$/;"	m	interface:UtilisateurService
+updateUtilisateur	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    public UtilisateurResponseDto updateUtilisateur(Long id, UtilisateurRequestDto dto) {$/;"	m	class:UtilisateurServiceImpl
+utilisateur	backend-spring/src/main/java/fr/ubo/kanban/model/Tache.java	/^    private Utilisateur utilisateur;$/;"	f	class:Tache	file:
+utilisateurMapper	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    private final UtilisateurMapper utilisateurMapper;$/;"	f	class:UtilisateurServiceImpl	file:
+utilisateurRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TableauServiceImpl.java	/^    private final UtilisateurRepository utilisateurRepository;$/;"	f	class:TableauServiceImpl	file:
+utilisateurRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/TacheServiceImpl.java	/^    private final UtilisateurRepository utilisateurRepository;$/;"	f	class:TacheServiceImpl	file:
+utilisateurRepository	backend-spring/src/main/java/fr/ubo/kanban/services/impl/UtilisateurServiceImpl.java	/^    private final UtilisateurRepository utilisateurRepository;$/;"	f	class:UtilisateurServiceImpl	file:
+utilisateurService	backend-spring/src/main/java/fr/ubo/kanban/controllers/UtilisateurController.java	/^    private final UtilisateurService utilisateurService;$/;"	f	class:UtilisateurController	file:
+utilisateurs	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauDto.java	/^    private List<Utilisateur> utilisateurs = new ArrayList<>();$/;"	f	class:TableauDto	file:
+utilisateurs	backend-spring/src/main/java/fr/ubo/kanban/dtos/tableau/TableauResponseDto.java	/^    private List<UtilisateurResponseDto> utilisateurs;$/;"	f	class:TableauResponseDto	file:
+utilisateurs	backend-spring/src/main/java/fr/ubo/kanban/model/Tableau.java	/^    private List<Utilisateur> utilisateurs = new ArrayList<>();$/;"	f	class:Tableau	file:
+verbose	backend-spring/mvnw	/^[ "${MVNW_VERBOSE-}" != true ] || verbose() { printf %s\\\\n "${1-}"; }$/;"	f
+verbose	backend-spring/mvnw	/^verbose() { :; }$/;"	f
+wrapperVersion	backend-spring/.mvn/wrapper/maven-wrapper.properties	/^wrapperVersion=3.3.4$/;"	k
+xsi	backend-spring/pom.xml	/^	xsi:schemaLocation="http:\/\/maven.apache.org\/POM\/4.0.0 https:\/\/maven.apache.org\/xsd\/mave/;"	n	uri:http://www.w3.org/2001/XMLSchema-instance
