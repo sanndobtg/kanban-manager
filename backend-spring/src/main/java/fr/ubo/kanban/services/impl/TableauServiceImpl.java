@@ -1,11 +1,14 @@
 package fr.ubo.kanban.services.impl;
 
-import fr.ubo.kanban.dtos.tableau.TableauDto;
+import fr.ubo.kanban.common.exception.NotFoundException;
+import fr.ubo.kanban.dtos.tableau.TableauRequestDto;
+import fr.ubo.kanban.dtos.tableau.TableauResponseDto;
 import fr.ubo.kanban.mappers.TableauMapper;
 import fr.ubo.kanban.model.Tableau;
+import fr.ubo.kanban.model.Utilisateur;
 import fr.ubo.kanban.repositories.TableauRepository;
+import fr.ubo.kanban.repositories.UtilisateurRepository;
 import fr.ubo.kanban.services.TableauService;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,49 +17,68 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class TableauServiceImpl implements TableauService {
 
     private final TableauRepository tableauRepository;
+    private final UtilisateurRepository utilisateurRepository;
     private final TableauMapper tableauMapper;
 
     @Override
-    public TableauDto saveTableau(TableauDto dto) {
-        Tableau tableau = tableauRepository.save(tableauMapper.toEntity(dto));
-        return tableauMapper.toDto(tableau);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public TableauDto getTableauById(Long id) {
-        Tableau tableau = tableauRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Le tableau avec l'ID %d n'existe pas", id)));
-        return tableauMapper.toDto(tableau);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<TableauDto> getAllTableaux() {
-        return tableauRepository.findAll().stream()
-                .map(tableauMapper::toDto)
+    public List<TableauResponseDto> findAll() {
+        return tableauRepository.findAll()
+                .stream()
+                .map(tableauMapper::toResponseDto)
                 .toList();
     }
 
     @Override
-    public TableauDto updateTableau(Long id, TableauDto dto) {
+    public TableauResponseDto findById(Long id) {
         Tableau tableau = tableauRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("Le tableau avec l'ID %d n'existe pas", id)));
-
-        if (dto.getNom() != null) tableau.setNom(dto.getNom());
-        if (dto.getUtilisateurs() != null) tableau.setUtilisateurs(dto.getUtilisateurs());
-
-        return tableauMapper.toDto(tableauRepository.save(tableau));
+                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + id));
+        return tableauMapper.toResponseDto(tableau);
     }
 
     @Override
-    public boolean deleteTableau(Long id) {
+    public TableauResponseDto create(TableauRequestDto dto) {
+        Tableau tableau = tableauMapper.toEntity(dto);
+        return tableauMapper.toResponseDto(tableauRepository.save(tableau));
+    }
+
+    @Override
+    public TableauResponseDto update(Long id, TableauRequestDto dto) {
+        Tableau tableau = tableauRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + id));
+        tableau.setNom(dto.getNom());
+        return tableauMapper.toResponseDto(tableauRepository.save(tableau));
+    }
+
+    @Override
+    public void delete(Long id) {
+        tableauRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + id));
         tableauRepository.deleteById(id);
-        return true;
+    }
+
+    @Override
+    public void ajouterMembre(Long idTableau, Long idUtilisateur) {
+        Tableau tableau = tableauRepository.findById(idTableau)
+                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + idTableau));
+        Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouve avec l'id : " + idUtilisateur));
+        if (!tableau.getUtilisateurs().contains(utilisateur)) {
+            tableau.getUtilisateurs().add(utilisateur);
+            tableauRepository.save(tableau);
+        }
+    }
+
+    @Override
+    public void retirerMembre(Long idTableau, Long idUtilisateur) {
+        Tableau tableau = tableauRepository.findById(idTableau)
+                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + idTableau));
+        Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouve avec l'id : " + idUtilisateur));
+        tableau.getUtilisateurs().remove(utilisateur);
+        tableauRepository.save(tableau);
     }
 }

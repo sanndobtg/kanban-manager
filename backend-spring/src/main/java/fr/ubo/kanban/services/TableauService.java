@@ -1,13 +1,16 @@
 package fr.ubo.kanban.services;
 
-import fr.ubo.kanban.dtos.tableau.TableauDto;
+import fr.ubo.kanban.dtos.tableau.TableauRequestDto;
+import fr.ubo.kanban.dtos.tableau.TableauResponseDto;
 
 import java.util.List;
 
 public interface TableauService {
-    TableauDto saveTableau(TableauDto dto);
-    TableauDto getTableauById(Long id);
-    List<TableauDto> getAllTableaux();
-    TableauDto updateTableau(Long id, TableauDto dto);
-    boolean deleteTableau(Long id);
+    List<TableauResponseDto> findAll();
+    TableauResponseDto findById(Long id);
+    TableauResponseDto create(TableauRequestDto dto);
+    TableauResponseDto update(Long id, TableauRequestDto dto);
+    void delete(Long id);
+    void ajouterMembre(Long idTableau, Long idUtilisateur);
+    void retirerMembre(Long idTableau, Long idUtilisateur);
 }

@@ -17,6 +17,7 @@ public class TacheMapper {
         dto.setIdColonne(tache.getColonne().getId());
         dto.setIdUtilisateur(tache.getUtilisateur().getId());
         dto.setPriorite(tache.getPriorite());
+        dto.setDateLimit(tache.getDateLimit());
         return dto;
     }
 
@@ -27,6 +28,7 @@ public class TacheMapper {
         tache.setColonne(colonne);
         tache.setUtilisateur(utilisateur);
         tache.setPriorite(dto.getPriorite());
+        tache.setDateLimit(dto.getDateLimit());
         return tache;
     }
 }

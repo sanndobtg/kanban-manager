@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "tache")
 @Data
@@ -33,4 +35,7 @@ public class Tache {
     @Column(name = "priorite", nullable = false, length = 45)
     @Enumerated(EnumType.STRING)
     private Priorite priorite;
+
+    @Column(name = "dateLimit")
+    private LocalDate dateLimit;
 }
