@@ -8,10 +8,6 @@ await initKeys();
 
 export const router = new Router();
 
-// ─────────────────────────────────────────
-// POST /login
-// Body: { email, mot_de_passe }
-// ─────────────────────────────────────────
 router.post("/login", async (ctx) => {
   const body = await ctx.request.body.json();
   const { email, mot_de_passe } = body;
@@ -22,8 +18,11 @@ router.post("/login", async (ctx) => {
     return;
   }
 
-  // Cherche l'utilisateur en BDD
+
+  
   const user = await findUserByEmail(email);
+
+  console.log("user trouvé    :", user);
 
   if (!user) {
     ctx.response.status = 401;
@@ -31,10 +30,8 @@ router.post("/login", async (ctx) => {
     return;
   }
 
-  // Vérifie le mot de passe
-  // ⚠️ Si tes mots de passe sont hashés en bcrypt, dis-le moi
-  // Pour l'instant comparaison simple en texte brut
-  if (user.mot_de_passe !== mot_de_passe) {
+
+  if (user.motDePasse !== mot_de_passe) {
     ctx.response.status = 401;
     ctx.response.body = { error: "Identifiants incorrects" };
     return;
@@ -54,7 +51,7 @@ router.post("/login", async (ctx) => {
       iat: getNumericDate(0),
       exp: getNumericDate(60 * 60 * config.jwt.expirationHours),
     },
-    getPrivateKey()
+    getPrivateKey(),
   );
 
   ctx.response.status = 200;
@@ -67,29 +64,27 @@ router.post("/login", async (ctx) => {
       prenom: user.prenom,
       email: user.email,
       role: user.role,
-    }
+    },
   };
 });
 
-// ─────────────────────────────────────────
-// GET /.well-known/jwks.json
-// ─────────────────────────────────────────
+
 router.get("/.well-known/jwks.json", (ctx) => {
   const jwk = getPublicKeyJwk();
   ctx.response.headers.set("Content-Type", "application/json");
   ctx.response.body = {
-    keys: [{
-      ...jwk,
-      use: "sig",
-      alg: "RS256",
-      kid: "auth-server-key-1",
-    }],
+    keys: [
+      {
+        ...jwk,
+        use: "sig",
+        alg: "RS256",
+        kid: "auth-server-key-1",
+      },
+    ],
   };
 });
 
-// ─────────────────────────────────────────
-// GET /health
-// ─────────────────────────────────────────
+
 router.get("/health", (ctx) => {
   ctx.response.body = { status: "ok" };
 });
