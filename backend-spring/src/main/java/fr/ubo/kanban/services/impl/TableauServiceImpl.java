@@ -10,6 +10,8 @@ import fr.ubo.kanban.repositories.TableauRepository;
 import fr.ubo.kanban.repositories.UtilisateurRepository;
 import fr.ubo.kanban.services.TableauService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,8 +28,13 @@ public class TableauServiceImpl implements TableauService {
 
     @Override
     public List<TableauResponseDto> findAll() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Long userId = Long.parseLong(authentication.getName());
+
+        // Retourne uniquement les tableaux dont l'utilisateur est membre
         return tableauRepository.findAll()
                 .stream()
+                .filter(t -> t.getUtilisateurs().stream().anyMatch(u -> u.getId().equals(userId)))
                 .map(tableauMapper::toResponseDto)
                 .toList();
     }
@@ -41,7 +48,15 @@ public class TableauServiceImpl implements TableauService {
 
     @Override
     public TableauResponseDto create(TableauRequestDto dto) {
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+
+        Utilisateur createur = utilisateurRepository.findById(Long.parseLong(userId))
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé"));
+
         Tableau tableau = tableauMapper.toEntity(dto);
+        tableau.getUtilisateurs().add(createur);
         return tableauMapper.toResponseDto(tableauRepository.save(tableau));
     }
 

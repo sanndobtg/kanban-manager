@@ -27,6 +27,10 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // Routes publiques → pas besoin de token
                         .requestMatchers(HttpMethod.POST, "/api/utilisateurs").permitAll()
+
+                        // ADMIN seulement
+//                        .requestMatchers(HttpMethod.DELETE, "/api/utilisateurs/**").hasAuthority("ADMIN")
+//                        .requestMatchers(HttpMethod.GET, "/api/utilisateurs").hasAuthority("ADMIN")
                         // Tout le reste nécessite un token
                         .anyRequest().authenticated()
                 )
