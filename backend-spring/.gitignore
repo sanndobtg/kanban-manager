@@ -44,3 +44,5 @@ build/
 
 ### Env ###
 application-local.yaml
+
+src/ressources/application.properties
