@@ -6,8 +6,22 @@
       </div>
       <div class="navbar-links">
         <router-link to="/tableaux">Tableaux</router-link>
-        <router-link to="/utilisateurs">Utilisateurs</router-link>
-        <button class="btn-logout" @click="authStore.logout">Déconnexion</button>
+        <!-- Visible uniquement pour les admins -->
+        <router-link v-if="authStore.isAdmin" to="/utilisateurs"
+          >Utilisateurs</router-link
+        >
+        <router-link to="/profil">Mon profil</router-link>
+        <div class="user-info">
+          <span class="user-name">{{ authStore.user?.prenom }}</span>
+          <span
+            :class="['role-badge-nav', authStore.user?.role?.toLowerCase()]"
+          >
+            {{ authStore.user?.role }}
+          </span>
+        </div>
+        <button class="btn-logout" @click="authStore.logout">
+          Déconnexion
+        </button>
       </div>
     </nav>
     <main :class="{ 'with-nav': authStore.isAuthenticated }">
@@ -17,13 +31,13 @@
 </template>
 
 <script>
-import { useAuthStore } from './stores/auth.js'
+import { useAuthStore } from "./stores/auth.js";
 export default {
   setup() {
-    const authStore = useAuthStore()
-    return { authStore }
-  }
-}
+    const authStore = useAuthStore();
+    return { authStore };
+  },
+};
 </script>
 
 <style>
@@ -34,7 +48,7 @@ export default {
 }
 
 body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   background: #f4f6f9;
   color: #2c3e50;
 }
@@ -51,7 +65,7 @@ body {
   justify-content: space-between;
   padding: 0 2rem;
   z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navbar-brand .logo {

@@ -1,6 +1,6 @@
 export const authService = {
   async login(email, mot_de_passe) {
-    // Appel direct vers Oak (pas via Spring Boot)
+    // Appel direct vers Oak 
     const response = await fetch('http://localhost:3000/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

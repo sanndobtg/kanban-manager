@@ -1,62 +1,82 @@
 <template>
   <div class="page">
-    <div class="page-header">
-      <h1>Utilisateurs</h1>
-      <span class="count-badge">{{ utilisateurs.length }} membres</span>
+    <!-- Accès refusé si pas admin -->
+    <div v-if="!authStore.isAdmin" class="access-denied">
+      <h2>🔒 Accès refusé</h2>
+      <p>Cette page est réservée aux administrateurs.</p>
+      <router-link to="/tableaux" class="btn-primary"
+        >Retour aux tableaux</router-link
+      >
     </div>
 
-    <div class="table-wrapper">
-      <table class="data-table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nom</th>
-            <th>Prénom</th>
-            <th>Email</th>
-            <th>Rôle</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="u in utilisateurs" :key="u.id">
-            <td class="td-id">{{ u.id }}</td>
-            <td><strong>{{ u.nom }}</strong></td>
-            <td>{{ u.prenom }}</td>
-            <td class="td-email">{{ u.email }}</td>
-            <td>
-              <span :class="['role-badge', u.role?.toLowerCase()]">{{ u.role }}</span>
-            </td>
-            <td>
-              <button class="btn-danger" @click="supprimer(u.id)">Supprimer</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <template v-else>
+      <div class="page-header">
+        <h1>Utilisateurs</h1>
+        <span class="count-badge">{{ utilisateurs.length }} membres</span>
+      </div>
+
+      <div class="table-wrapper">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Email</th>
+              <th>Rôle</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="u in utilisateurs" :key="u.id">
+              <td class="td-id">{{ u.id }}</td>
+              <td>
+                <strong>{{ u.nom }}</strong>
+              </td>
+              <td>{{ u.prenom }}</td>
+              <td class="td-email">{{ u.email }}</td>
+              <td>
+                <span :class="['role-badge', u.role?.toLowerCase()]">{{
+                  u.role
+                }}</span>
+              </td>
+              <td>
+                <button class="btn-danger" @click="supprimer(u.id)">
+                  Supprimer
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { utilisateurService } from '../services/utilisateurService.js'
+import { ref, onMounted } from "vue";
+import { utilisateurService } from "../services/utilisateurService.js";
+import { useAuthStore } from "../stores/auth.js";
 
 export default {
   setup() {
-    const utilisateurs = ref([])
+    const utilisateurs = ref([]);
+    const authStore = useAuthStore();
 
     onMounted(async () => {
-      const res = await utilisateurService.getAll()
-      utilisateurs.value = res.data
-    })
+      if (!authStore.isAdmin) return;
+      const res = await utilisateurService.getAll();
+      utilisateurs.value = res.data;
+    });
 
     async function supprimer(id) {
-      await utilisateurService.delete(id)
-      utilisateurs.value = utilisateurs.value.filter(u => u.id !== id)
+      await utilisateurService.delete(id);
+      utilisateurs.value = utilisateurs.value.filter((u) => u.id !== id);
     }
 
-    return { utilisateurs, supprimer }
-  }
-}
+    return { utilisateurs, authStore, supprimer };
+  },
+};
 </script>
 
 <style scoped>
@@ -91,7 +111,7 @@ export default {
 .table-wrapper {
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
