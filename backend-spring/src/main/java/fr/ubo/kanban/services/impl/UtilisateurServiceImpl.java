@@ -1,5 +1,6 @@
 package fr.ubo.kanban.services.impl;
 
+import fr.ubo.kanban.common.exception.NotFoundException;
 import fr.ubo.kanban.dtos.utilisateur.UtilisateurRequestDto;
 import fr.ubo.kanban.dtos.utilisateur.UtilisateurResponseDto;
 import fr.ubo.kanban.mappers.UtilisateurMapper;
@@ -8,6 +9,7 @@ import fr.ubo.kanban.repositories.UtilisateurRepository;
 import fr.ubo.kanban.services.UtilisateurService;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,12 +22,17 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     private final UtilisateurRepository utilisateurRepository;
     private final UtilisateurMapper utilisateurMapper;
 
+    private final PasswordEncoder passwordEncoder;
+
+
+
     @Override
     public UtilisateurResponseDto saveUtilisateur(UtilisateurRequestDto dto) {
-        Utilisateur utilisateur = utilisateurRepository.save(utilisateurMapper.toEntity(dto));
-        return utilisateurMapper.toResponseDto(utilisateur);
+        Utilisateur utilisateur = utilisateurMapper.toEntity(dto);
+        // Hashe le mot de passe avant de sauvegarder
+        utilisateur.setMotDePasse(passwordEncoder.encode(dto.getMotDePasse()));
+        return utilisateurMapper.toResponseDto(utilisateurRepository.save(utilisateur));
     }
-
     @Override
     @Transactional(readOnly = true)
     public UtilisateurResponseDto getUtilisateurById(Long id) {
@@ -52,15 +59,15 @@ public class UtilisateurServiceImpl implements UtilisateurService {
     @Override
     public UtilisateurResponseDto updateUtilisateur(Long id, UtilisateurRequestDto dto) {
         Utilisateur utilisateur = utilisateurRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException(
-                        String.format("L'utilisateur avec l'ID %d n'existe pas", id)));
-
-        if (dto.getNom() != null) utilisateur.setNom(dto.getNom());
-        if (dto.getPrenom() != null) utilisateur.setPrenom(dto.getPrenom());
-        if (dto.getEmail() != null) utilisateur.setEmail(dto.getEmail());
-        if (dto.getRole() != null) utilisateur.setRole(dto.getRole());
-        if (dto.getMotDePasse() != null) utilisateur.setMotDePasse(dto.getMotDePasse());
-
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé : " + id));
+        utilisateur.setNom(dto.getNom());
+        utilisateur.setPrenom(dto.getPrenom());
+        utilisateur.setEmail(dto.getEmail());
+        utilisateur.setRole(dto.getRole());
+        // Hashe seulement si un nouveau mot de passe est fourni
+        if (dto.getMotDePasse() != null && !dto.getMotDePasse().isBlank()) {
+            utilisateur.setMotDePasse(passwordEncoder.encode(dto.getMotDePasse()));
+        }
         return utilisateurMapper.toResponseDto(utilisateurRepository.save(utilisateur));
     }
 }
