@@ -2,12 +2,15 @@ import { Router } from "oak";
 import { create, getNumericDate } from "djwt";
 import { config } from "./config.ts";
 import { initKeys, getPrivateKey, getPublicKeyJwk } from "./keys.ts";
-import { findUserByEmail } from "./db.ts";
+import { findUserByEmail, verifierMotDePasse } from "./db.ts";
 
 await initKeys();
 
 export const router = new Router();
 
+// ─────────────────────────────────────────
+// POST /login
+// ─────────────────────────────────────────
 router.post("/login", async (ctx) => {
   const body = await ctx.request.body.json();
   const { email, mot_de_passe } = body;
@@ -18,11 +21,7 @@ router.post("/login", async (ctx) => {
     return;
   }
 
-
-  
   const user = await findUserByEmail(email);
-
-  console.log("user trouvé    :", user);
 
   if (!user) {
     ctx.response.status = 401;
@@ -30,14 +29,18 @@ router.post("/login", async (ctx) => {
     return;
   }
 
+  // Vérifie le mot de passe avec BCrypt
+  const motDePasseValide = await verifierMotDePasse(
+    mot_de_passe,
+    user.motDePasse,
+  );
 
-  if (user.motDePasse !== mot_de_passe) {
+  if (!motDePasseValide) {
     ctx.response.status = 401;
     ctx.response.body = { error: "Identifiants incorrects" };
     return;
   }
 
-  // Génère le JWT
   const token = await create(
     { alg: "RS256", typ: "JWT" },
     {
@@ -68,7 +71,9 @@ router.post("/login", async (ctx) => {
   };
 });
 
-
+// ─────────────────────────────────────────
+// GET /.well-known/jwks.json
+// ─────────────────────────────────────────
 router.get("/.well-known/jwks.json", (ctx) => {
   const jwk = getPublicKeyJwk();
   ctx.response.headers.set("Content-Type", "application/json");
@@ -84,7 +89,9 @@ router.get("/.well-known/jwks.json", (ctx) => {
   };
 });
 
-
+// ─────────────────────────────────────────
+// GET /health
+// ─────────────────────────────────────────
 router.get("/health", (ctx) => {
   ctx.response.body = { status: "ok" };
 });
