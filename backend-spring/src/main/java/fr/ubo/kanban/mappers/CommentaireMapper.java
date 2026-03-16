@@ -10,15 +10,6 @@ import java.time.LocalDateTime;
 @Component
 public class CommentaireMapper {
 
-    public Commentaire toEntity(CommentaireRequestDto dto, Long idTache) {
-        Commentaire commentaire = new Commentaire();
-        commentaire.setIdTache(idTache);
-        commentaire.setIdUtilisateur(dto.getIdUtilisateur());
-        commentaire.setContenu(dto.getContenu());
-        commentaire.setDateCreation(LocalDateTime.now());
-        return commentaire;
-    }
-
     public CommentaireResponseDto toResponseDto(Commentaire commentaire) {
         CommentaireResponseDto dto = new CommentaireResponseDto();
         dto.setId(commentaire.getId());
@@ -27,5 +18,15 @@ public class CommentaireMapper {
         dto.setContenu(commentaire.getContenu());
         dto.setDateCreation(commentaire.getDateCreation());
         return dto;
+    }
+
+    // idUtilisateur vient du JWT, pas du dto
+    public Commentaire toEntity(CommentaireRequestDto dto, Long idTache, Long idUtilisateur) {
+        Commentaire commentaire = new Commentaire();
+        commentaire.setIdTache(idTache);
+        commentaire.setIdUtilisateur(idUtilisateur);
+        commentaire.setContenu(dto.getContenu());
+        commentaire.setDateCreation(LocalDateTime.now());
+        return commentaire;
     }
 }

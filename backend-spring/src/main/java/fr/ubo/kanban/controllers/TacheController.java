@@ -4,6 +4,7 @@ import fr.ubo.kanban.dtos.tache.TacheDto;
 import fr.ubo.kanban.services.TacheService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,5 +46,23 @@ public class TacheController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteTache(@PathVariable Long id) {
         tacheService.deleteTache(id);
+    }
+
+    // Assigner un utilisateur à une tâche
+    @PostMapping("/{idTache}/utilisateurs/{idUtilisateur}")
+    public ResponseEntity<Void> ajouterUtilisateur(
+            @PathVariable Long idTache,
+            @PathVariable Long idUtilisateur) {
+        tacheService.ajouterUtilisateur(idTache, idUtilisateur);
+        return ResponseEntity.ok().build();
+    }
+
+    // Retirer un utilisateur d'une tâche
+    @DeleteMapping("/{idTache}/utilisateurs/{idUtilisateur}")
+    public ResponseEntity<Void> retirerUtilisateur(
+            @PathVariable Long idTache,
+            @PathVariable Long idUtilisateur) {
+        tacheService.retirerUtilisateur(idTache, idUtilisateur);
+        return ResponseEntity.ok().build();
     }
 }

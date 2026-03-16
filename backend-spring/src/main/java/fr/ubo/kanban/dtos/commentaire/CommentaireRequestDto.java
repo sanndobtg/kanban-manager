@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentaireRequestDto {
-    private Long idUtilisateur;
-    private String contenu;
+    private String contenu; // idUtilisateur retiré — vient du JWT
 }
