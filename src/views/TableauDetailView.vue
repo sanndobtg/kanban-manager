@@ -15,11 +15,9 @@
       </div>
     </div>
 
-    <!-- Panel membres -->
+    <!-- Panel membres du tableau -->
     <div v-if="showMembres" class="membres-panel">
       <h3>Membres du tableau</h3>
-
-      <!-- Liste des membres actuels -->
       <div class="membres-liste">
         <div
           v-for="membre in store.tableauActuel?.utilisateurs"
@@ -40,8 +38,6 @@
           </button>
         </div>
       </div>
-
-      <!-- Ajouter un membre -->
       <div class="ajouter-membre">
         <h4>Ajouter un membre</h4>
         <div class="ajouter-membre-form">
@@ -57,8 +53,8 @@
           </select>
           <button
             class="btn-primary"
-            @click="ajouterMembre"
             :disabled="!membreSelectionne"
+            @click="ajouterMembre"
           >
             Ajouter
           </button>
@@ -66,6 +62,7 @@
       </div>
     </div>
 
+    <!-- Formulaire nouvelle colonne -->
     <div v-if="showColonneForm" class="create-form">
       <input v-model="nouvelleColonne" placeholder="Nom de la colonne" />
       <button class="btn-primary" @click="ajouterColonne">Créer</button>
@@ -74,6 +71,7 @@
       </button>
     </div>
 
+    <!-- Board Kanban -->
     <div class="kanban-board">
       <div
         v-for="colonne in colonnes"
@@ -96,14 +94,16 @@
             class="tache-card"
             draggable="true"
             @dragstart="onDragStart($event, tache, colonne.id)"
+            @dblclick="ouvrirTache(tache)"
           >
             <div class="tache-header">
               <span :class="['priorite-badge', tache.priorite?.toLowerCase()]">
                 {{ tache.priorite }}
               </span>
               <button
+                v-if="tache.idCreateur === authStore.user.id"
                 class="btn-close"
-                @click="supprimerTache(tache.id, colonne.id)"
+                @click.stop="supprimerTache(tache.id, colonne.id)"
               >
                 ✕
               </button>
@@ -115,6 +115,7 @@
             <p v-if="tache.dateLimit" class="tache-date">
               📅 {{ tache.dateLimit }}
             </p>
+            <p class="tache-hint">Double-clic pour gérer</p>
           </div>
         </div>
 
@@ -157,6 +158,151 @@
         </form>
       </div>
     </div>
+
+    <!-- Modal détail tâche -->
+    <div
+      v-if="tacheSelectionnee"
+      class="modal-overlay"
+      @click.self="tacheSelectionnee = null"
+    >
+      <div class="modal">
+        <div class="modal-header">
+          <h2>{{ tacheSelectionnee.titre }}</h2>
+          <button class="btn-close-modal" @click="tacheSelectionnee = null">
+            ✕
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <p class="modal-desc">{{ tacheSelectionnee.description }}</p>
+
+          <div class="modal-meta">
+            <span
+              :class="[
+                'priorite-badge',
+                tacheSelectionnee.priorite?.toLowerCase(),
+              ]"
+            >
+              {{ tacheSelectionnee.priorite }}
+            </span>
+            <span v-if="tacheSelectionnee.dateLimit" class="tache-date">
+              📅 {{ tacheSelectionnee.dateLimit }}
+            </span>
+          </div>
+
+          <!-- Membres assignés à la tâche -->
+          <div class="modal-section">
+            <h4>Membres assignés</h4>
+            <div class="membres-assignes">
+              <div
+                v-for="idU in tacheSelectionnee.idUtilisateurs"
+                :key="idU"
+                class="membre-tag"
+              >
+                <span>{{ getNomUtilisateur(idU) }}</span>
+                <button
+                  v-if="tacheSelectionnee.idCreateur === authStore.user.id"
+                  @click="retirerUtilisateurTache(tacheSelectionnee, idU)"
+                >
+                  ✕
+                </button>
+              </div>
+              <p
+                v-if="!tacheSelectionnee.idUtilisateurs?.length"
+                class="empty-msg"
+              >
+                Aucun membre assigné
+              </p>
+            </div>
+          </div>
+
+          <!-- Ajouter un membre à la tâche -->
+          <div class="modal-section">
+            <h4>Ajouter un membre à la tâche</h4>
+            <div class="ajouter-membre-form">
+              <select v-model="utilisateurATache">
+                <option value="">-- Choisir --</option>
+                <option
+                  v-for="u in utilisateursDispo(tacheSelectionnee)"
+                  :key="u.id"
+                  :value="u.id"
+                >
+                  {{ u.prenom }} {{ u.nom }}
+                </option>
+              </select>
+              <button
+                class="btn-primary"
+                :disabled="!utilisateurATache"
+                @click="ajouterUtilisateurTache(tacheSelectionnee)"
+              >
+                Ajouter
+              </button>
+            </div>
+          </div>
+
+          <!-- Commentaires -->
+          <div
+            v-if="
+              tacheSelectionnee.idUtilisateurs?.includes(authStore.user.id) ||
+              tacheSelectionnee.idCreateur === authStore.user.id
+            "
+            class="modal-section"
+          >
+            <h4>Commentaires ({{ commentaires.length }})</h4>
+
+            <div class="commentaires-liste">
+              <div
+                v-for="c in commentaires"
+                :key="c.id"
+                class="commentaire-item"
+              >
+                <div class="commentaire-header">
+                  <span class="commentaire-auteur">
+                    {{ getNomUtilisateurById(c.idUtilisateur) }}
+                  </span>
+                  <span class="commentaire-date">
+                    {{ new Date(c.dateCreation).toLocaleString("fr-FR") }}
+                  </span>
+                  <button
+                    v-if="c.idUtilisateur === authStore.user.id"
+                    class="btn-close"
+                    @click="supprimerCommentaire(c.id)"
+                  >
+                    ✕
+                  </button>
+                </div>
+                <p class="commentaire-contenu">{{ c.contenu }}</p>
+              </div>
+              <p v-if="!commentaires.length" class="empty-msg">
+                Aucun commentaire
+              </p>
+            </div>
+
+            <div class="commentaire-form">
+              <input
+                v-model="nouveauCommentaire"
+                placeholder="Ajouter un commentaire..."
+                @keyup.enter="ajouterCommentaire"
+              />
+              <button
+                class="btn-primary"
+                :disabled="!nouveauCommentaire.trim()"
+                @click="ajouterCommentaire"
+              >
+                Envoyer
+              </button>
+            </div>
+          </div>
+
+          <div v-else class="modal-section">
+            <p class="empty-msg">
+              🔒 Vous devez être assigné à cette tâche pour voir les
+              commentaires.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -169,6 +315,8 @@ import { useTachesStore } from "../stores/taches.js";
 import { useAuthStore } from "../stores/auth.js";
 import { utilisateurService } from "../services/utilisateurService.js";
 import { tableauService } from "../services/tableauService.js";
+import { tacheService } from "../services/tacheService.js";
+import { commentaireService } from "../services/commentaireService.js";
 
 export default {
   setup() {
@@ -185,8 +333,11 @@ export default {
     const dragData = ref(null);
     const tousUtilisateurs = ref([]);
     const membreSelectionne = ref("");
+    const tacheSelectionnee = ref(null);
+    const utilisateurATache = ref("");
+    const commentaires = ref([]);
+    const nouveauCommentaire = ref("");
 
-    // Utilisateurs pas encore membres du tableau
     const utilisateursDisponibles = computed(() => {
       const membreIds = (store.tableauActuel?.utilisateurs || []).map(
         (u) => u.id,
@@ -237,7 +388,7 @@ export default {
       await tachesStore.create({
         ...form,
         idColonne,
-        idUtilisateur: authStore.user.id,
+        idUtilisateurs: [],
       });
       formulaires[idColonne] = videFormulaire();
       formOuvert.value = null;
@@ -247,13 +398,14 @@ export default {
       await tachesStore.delete(id, idColonne);
     }
 
+    // Membres du tableau
     async function ajouterMembre() {
       if (!membreSelectionne.value) return;
       await tableauService.ajouterMembre(
         route.params.id,
         membreSelectionne.value,
       );
-      await store.fetchById(route.params.id); // recharge le tableau avec les nouveaux membres
+      await store.fetchById(route.params.id);
       membreSelectionne.value = "";
     }
 
@@ -262,6 +414,86 @@ export default {
       await store.fetchById(route.params.id);
     }
 
+    // Modal tâche
+    async function ouvrirTache(tache) {
+      tacheSelectionnee.value = { ...tache };
+      utilisateurATache.value = "";
+      nouveauCommentaire.value = "";
+      commentaires.value = [];
+
+      const estAssigne = tache.idUtilisateurs?.includes(authStore.user.id);
+      const estCreateur = tache.idCreateur === authStore.user.id;
+
+      if (estAssigne || estCreateur) {
+        try {
+          const res = await commentaireService.getByTache(tache.id);
+          commentaires.value = res.data.data ?? res.data;
+        } catch (e) {
+          commentaires.value = [];
+        }
+      }
+    }
+
+    function getNomUtilisateur(id) {
+      const u = tousUtilisateurs.value.find((u) => u.id === id);
+      return u ? `${u.prenom} ${u.nom}` : `Utilisateur #${id}`;
+    }
+
+    function getNomUtilisateurById(id) {
+      const u = tousUtilisateurs.value.find((u) => u.id === id);
+      return u ? `${u.prenom} ${u.nom}` : `Utilisateur #${id}`;
+    }
+
+    function utilisateursDispo(tache) {
+      return tousUtilisateurs.value.filter(
+        (u) => !tache.idUtilisateurs?.includes(u.id),
+      );
+    }
+
+    async function ajouterUtilisateurTache(tache) {
+      if (!utilisateurATache.value) return;
+      await tacheService.ajouterUtilisateur(tache.id, utilisateurATache.value);
+      tache.idUtilisateurs = [
+        ...(tache.idUtilisateurs || []),
+        utilisateurATache.value,
+      ];
+      const tacheDansStore = tachesStore.tachesParColonne[
+        tache.idColonne
+      ]?.find((t) => t.id === tache.id);
+      if (tacheDansStore)
+        tacheDansStore.idUtilisateurs = [...tache.idUtilisateurs];
+      utilisateurATache.value = "";
+    }
+
+    async function retirerUtilisateurTache(tache, idUtilisateur) {
+      await tacheService.retirerUtilisateur(tache.id, idUtilisateur);
+      tache.idUtilisateurs = tache.idUtilisateurs.filter(
+        (id) => id !== idUtilisateur,
+      );
+      const tacheDansStore = tachesStore.tachesParColonne[
+        tache.idColonne
+      ]?.find((t) => t.id === tache.id);
+      if (tacheDansStore)
+        tacheDansStore.idUtilisateurs = [...tache.idUtilisateurs];
+    }
+
+    // Commentaires
+    async function ajouterCommentaire() {
+      if (!nouveauCommentaire.value.trim()) return;
+      const res = await commentaireService.create(tacheSelectionnee.value.id, {
+        contenu: nouveauCommentaire.value,
+      });
+      const commentaire = res.data.data ?? res.data;
+      commentaires.value.push(commentaire);
+      nouveauCommentaire.value = "";
+    }
+
+    async function supprimerCommentaire(id) {
+      await commentaireService.delete(id);
+      commentaires.value = commentaires.value.filter((c) => c.id !== id);
+    }
+
+    // Drag & drop
     function onDragStart(event, tache, idColonneSource) {
       dragData.value = { tache, idColonneSource };
       event.dataTransfer.effectAllowed = "move";
@@ -287,12 +519,24 @@ export default {
       formulaires,
       membreSelectionne,
       utilisateursDisponibles,
+      tacheSelectionnee,
+      utilisateurATache,
+      commentaires,
+      nouveauCommentaire,
       toggleForm,
       ajouterColonne,
       ajouterTache,
       supprimerTache,
       ajouterMembre,
       retirerMembre,
+      ouvrirTache,
+      getNomUtilisateur,
+      getNomUtilisateurById,
+      utilisateursDispo,
+      ajouterUtilisateurTache,
+      retirerUtilisateurTache,
+      ajouterCommentaire,
+      supprimerCommentaire,
       onDragStart,
       onDrop,
     };
@@ -301,125 +545,6 @@ export default {
 </script>
 
 <style scoped>
-/* ... tous les styles précédents ... */
-
-.header-actions {
-  display: flex;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-.membres-panel {
-  background: #fff;
-  border-radius: 10px;
-  padding: 1.5rem;
-  margin-bottom: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.membres-panel h3 {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #1a1f36;
-  margin-bottom: 1rem;
-}
-
-.membres-liste {
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  margin-bottom: 1.5rem;
-}
-
-.membre-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 1rem;
-  background: #f7fafc;
-  border-radius: 8px;
-}
-
-.membre-info {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.membre-avatar {
-  background: #1a1f36;
-  color: #fff;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-}
-
-.role-badge {
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 0.2rem 0.6rem;
-  border-radius: 20px;
-  text-transform: uppercase;
-}
-
-.role-badge.admin {
-  background: #fef3c7;
-  color: #d97706;
-}
-.role-badge.utilisateur {
-  background: #e0f2fe;
-  color: #0369a1;
-}
-
-.ajouter-membre h4 {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 0.8rem;
-}
-
-.ajouter-membre-form {
-  display: flex;
-  gap: 0.8rem;
-}
-
-.ajouter-membre-form select {
-  flex: 1;
-  padding: 0.65rem 1rem;
-  border: 1.5px solid #e2e8f0;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  outline: none;
-  background: #fff;
-}
-
-.ajouter-membre-form select:focus {
-  border-color: #4c6ef5;
-}
-
-.btn-danger-sm {
-  background: transparent;
-  color: #e53e3e;
-  border: 1.5px solid #fed7d7;
-  padding: 0.35rem 0.8rem;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.btn-danger-sm:hover {
-  background: #e53e3e;
-  color: #fff;
-  border-color: #e53e3e;
-}
-
-/* Tous les autres styles précédents restent identiques */
 .page {
   padding: 2rem;
   max-width: 100%;
@@ -445,6 +570,94 @@ export default {
   font-weight: 700;
   color: #1a1f36;
 }
+.header-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+
+.membres-panel {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+.membres-panel h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1f36;
+  margin-bottom: 1rem;
+}
+.membres-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+.membre-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.7rem 1rem;
+  background: #f7fafc;
+  border-radius: 8px;
+}
+.membre-info {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+.membre-avatar {
+  background: #1a1f36;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.role-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  text-transform: uppercase;
+}
+.role-badge.admin {
+  background: #fef3c7;
+  color: #d97706;
+}
+.role-badge.utilisateur {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+.ajouter-membre h4 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #4a5568;
+  margin-bottom: 0.8rem;
+}
+.ajouter-membre-form {
+  display: flex;
+  gap: 0.8rem;
+}
+.ajouter-membre-form select {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  background: #fff;
+}
+.ajouter-membre-form select:focus {
+  border-color: #4c6ef5;
+}
+
 .create-form {
   display: flex;
   gap: 0.8rem;
@@ -462,6 +675,7 @@ export default {
   outline: none;
   font-size: 0.9rem;
 }
+
 .kanban-board {
   display: flex;
   gap: 1.2rem;
@@ -562,6 +776,12 @@ export default {
   font-size: 0.78rem;
   color: #a0aec0;
 }
+.tache-hint {
+  font-size: 0.72rem;
+  color: #cbd5e0;
+  margin-top: 0.4rem;
+  font-style: italic;
+}
 .btn-close {
   background: transparent;
   border: none;
@@ -623,6 +843,163 @@ export default {
   display: flex;
   gap: 0.5rem;
 }
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal {
+  background: #fff;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 520px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f7fafc;
+  position: sticky;
+  top: 0;
+}
+.modal-header h2 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #1a1f36;
+}
+.btn-close-modal {
+  background: transparent;
+  border: none;
+  font-size: 1rem;
+  color: #a0aec0;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.btn-close-modal:hover {
+  color: #e53e3e;
+}
+.modal-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+.modal-desc {
+  color: #4a5568;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+.modal-meta {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+}
+.modal-section {
+  border-top: 1px solid #f0f2f5;
+  padding-top: 1rem;
+}
+.modal-section h4 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #718096;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.8rem;
+}
+.membres-assignes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.membre-tag {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #edf2ff;
+  color: #4c6ef5;
+  padding: 0.3rem 0.7rem;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.membre-tag button {
+  background: transparent;
+  border: none;
+  color: #4c6ef5;
+  cursor: pointer;
+  font-size: 0.75rem;
+  padding: 0;
+  transition: color 0.2s;
+}
+.membre-tag button:hover {
+  color: #e53e3e;
+}
+.empty-msg {
+  color: #a0aec0;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+.commentaires-liste {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 250px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+.commentaire-item {
+  background: #f7fafc;
+  border-radius: 8px;
+  padding: 0.8rem;
+}
+.commentaire-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+.commentaire-auteur {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #1a1f36;
+}
+.commentaire-date {
+  font-size: 0.75rem;
+  color: #a0aec0;
+  flex: 1;
+}
+.commentaire-contenu {
+  font-size: 0.88rem;
+  color: #4a5568;
+  line-height: 1.4;
+}
+.commentaire-form {
+  display: flex;
+  gap: 0.6rem;
+}
+.commentaire-form input {
+  flex: 1;
+  padding: 0.65rem 1rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+}
+.commentaire-form input:focus {
+  border-color: #4c6ef5;
+}
+
 .btn-primary {
   background: #1a1f36;
   color: #fff;
@@ -637,6 +1014,10 @@ export default {
 .btn-primary:hover {
   background: #2d3561;
 }
+.btn-primary:disabled {
+  background: #a0aec0;
+  cursor: not-allowed;
+}
 .btn-secondary {
   background: transparent;
   color: #4a5568;
@@ -649,5 +1030,20 @@ export default {
 }
 .btn-secondary:hover {
   background: #f7fafc;
+}
+.btn-danger-sm {
+  background: transparent;
+  color: #e53e3e;
+  border: 1.5px solid #fed7d7;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-danger-sm:hover {
+  background: #e53e3e;
+  color: #fff;
+  border-color: #e53e3e;
 }
 </style>
