@@ -33,7 +33,14 @@
               membre.role
             }}</span>
           </div>
-          <button class="btn-danger-sm" @click="retirerMembre(membre.id)">
+          <button
+            v-if="
+              store.tableauActuel?.idCreateur === authStore.user.id &&
+              membre.id !== authStore.user.id
+            "
+            class="btn-danger-sm"
+            @click="retirerMembre(membre.id)"
+          >
             Retirer
           </button>
         </div>
