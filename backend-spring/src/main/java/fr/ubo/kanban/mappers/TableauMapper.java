@@ -15,6 +15,7 @@ public class TableauMapper {
         TableauResponseDto dto = new TableauResponseDto();
         dto.setId(tableau.getId());
         dto.setNom(tableau.getNom());
+        dto.setIdCreateur(tableau.getCreateur().getId());
         dto.setUtilisateurs(
                 tableau.getUtilisateurs().stream().map(u -> {
                     UtilisateurResponseDto uDto = new UtilisateurResponseDto();

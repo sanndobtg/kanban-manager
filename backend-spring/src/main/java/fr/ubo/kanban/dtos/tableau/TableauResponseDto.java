@@ -13,5 +13,6 @@ import java.util.List;
 public class TableauResponseDto {
     private Long id;
     private String nom;
+    private Long idCreateur;
     private List<UtilisateurResponseDto> utilisateurs;
 }

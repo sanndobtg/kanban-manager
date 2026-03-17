@@ -1,9 +1,9 @@
 package fr.ubo.kanban.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,11 @@ public class Tableau {
 
     @Column(name = "nom", nullable = false, length = 45)
     private String nom;
+
+    // Créateur du tableau
+    @ManyToOne
+    @JoinColumn(name = "idCreateur", nullable = true)
+    private Utilisateur createur;
 
     @ManyToMany
     @JoinTable(

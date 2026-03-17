@@ -10,10 +10,12 @@ import fr.ubo.kanban.repositories.TableauRepository;
 import fr.ubo.kanban.repositories.UtilisateurRepository;
 import fr.ubo.kanban.services.TableauService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -48,18 +50,17 @@ public class TableauServiceImpl implements TableauService {
 
     @Override
     public TableauResponseDto create(TableauRequestDto dto) {
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userId = authentication.getName();
+        Long idCreateur = Long.parseLong(authentication.getName());
 
-        Utilisateur createur = utilisateurRepository.findById(Long.parseLong(userId))
+        Utilisateur createur = utilisateurRepository.findById(idCreateur)
                 .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé"));
 
         Tableau tableau = tableauMapper.toEntity(dto);
+        tableau.setCreateur(createur);
         tableau.getUtilisateurs().add(createur);
         return tableauMapper.toResponseDto(tableauRepository.save(tableau));
     }
-
     @Override
     public TableauResponseDto update(Long id, TableauRequestDto dto) {
         Tableau tableau = tableauRepository.findById(id)
@@ -90,9 +91,29 @@ public class TableauServiceImpl implements TableauService {
     @Override
     public void retirerMembre(Long idTableau, Long idUtilisateur) {
         Tableau tableau = tableauRepository.findById(idTableau)
-                .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + idTableau));
+                .orElseThrow(() -> new NotFoundException("Tableau non trouvé : " + idTableau));
+
+        // Vérifie que c'est le créateur qui retire
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long idConnecte = Long.parseLong(auth.getName());
+
+        if (!tableau.getCreateur().getId().equals(idConnecte)) {
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "Seul le créateur du tableau peut retirer un membre"
+            );
+        }
+
+        // Le créateur ne peut pas se retirer lui-même
+        if (idUtilisateur.equals(tableau.getCreateur().getId())) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Le créateur ne peut pas se retirer du tableau"
+            );
+        }
+
         Utilisateur utilisateur = utilisateurRepository.findById(idUtilisateur)
-                .orElseThrow(() -> new NotFoundException("Utilisateur non trouve avec l'id : " + idUtilisateur));
+                .orElseThrow(() -> new NotFoundException("Utilisateur non trouvé : " + idUtilisateur));
         tableau.getUtilisateurs().remove(utilisateur);
         tableauRepository.save(tableau);
     }
