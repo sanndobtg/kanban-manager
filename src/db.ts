@@ -6,7 +6,7 @@ await client.connect({
   hostname: Deno.env.get("DB_HOST") || "localhost",
   port: Number(Deno.env.get("DB_PORT")) || 3306,
   db: Deno.env.get("DB_NAME") || "kanban_db",
-  username: Deno.env.get("DB_USER"),
+  username: Deno.env.get("DB_USER") || root,
   password: "",
 });
 
