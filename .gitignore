@@ -25,3 +25,5 @@ dist-ssr
 *.iml
 Thumbs.db
 
+.env
+
