@@ -279,26 +279,38 @@
                   </button>
                 </div>
                 <p class="commentaire-contenu">{{ c.contenu }}</p>
+                <div v-if="c.piecesJointes?.length" class="pieces-jointes">
+                <div v-for="pj in c.piecesJointes" :key="pj.id" class="pj-item" @click="telechargerFichier(pj)">
+                  <span>📎 {{ pj.nomFichier }}</span>
+                  <span class="pj-size">{{ formatTaille(pj.taille) }}</span>
+                </div>
+              </div>
               </div>
               <p v-if="!commentaires.length" class="empty-msg">
                 Aucun commentaire
               </p>
             </div>
 
-            <div class="commentaire-form">
-              <input
-                v-model="nouveauCommentaire"
-                placeholder="Ajouter un commentaire..."
-                @keyup.enter="ajouterCommentaire"
-              />
-              <button
-                class="btn-primary"
-                :disabled="!nouveauCommentaire.trim()"
-                @click="ajouterCommentaire"
-              >
-                Envoyer
-              </button>
-            </div>
+           <div class="commentaire-form-wrap">
+  <div v-if="fichiersSelectionnes.length" class="fichiers-preview">
+    <div v-for="(f, i) in fichiersSelectionnes" :key="i" class="fichier-tag">
+      📎 {{ f.name }} ({{ formatTaille(f.size) }})
+      <button class="btn-close" @click="retirerFichier(i)">✕</button>
+    </div>
+  </div>
+  <div class="commentaire-form">
+    <input v-model="nouveauCommentaire" placeholder="Ajouter un commentaire..."
+           @keyup.enter="ajouterCommentaire" :disabled="envoyEnCours" />
+    <label class="btn-attach" title="Joindre un fichier">
+      📎<input type="file" multiple hidden ref="fileInput" @change="onFichiersChange" />
+    </label>
+    <button class="btn-primary"
+            :disabled="(!nouveauCommentaire.trim() && !fichiersSelectionnes.length) || envoyEnCours"
+            @click="ajouterCommentaire">
+      {{ envoyEnCours ? '...' : 'Envoyer' }}
+    </button>
+  </div>
+</div>
           </div>
 
           <div v-else class="modal-section">
@@ -325,6 +337,8 @@ import { tableauService } from "../services/tableauService.js";
 import { tacheService } from "../services/tacheService.js";
 import { commentaireService } from "../services/commentaireService.js";
 
+import { fichierService } from "../services/fichierService.js";
+
 export default {
   setup() {
     const route = useRoute();
@@ -344,6 +358,10 @@ export default {
     const utilisateurATache = ref("");
     const commentaires = ref([]);
     const nouveauCommentaire = ref("");
+
+    const fichiersSelectionnes = ref([]);
+    const envoyEnCours = ref(false);
+    const fileInput = ref(null);
 
     const utilisateursDisponibles = computed(() => {
       const membreIds = (store.tableauActuel?.utilisateurs || []).map(
@@ -486,13 +504,22 @@ export default {
 
     // Commentaires
     async function ajouterCommentaire() {
-      if (!nouveauCommentaire.value.trim()) return;
-      const res = await commentaireService.create(tacheSelectionnee.value.id, {
-        contenu: nouveauCommentaire.value,
-      });
-      const commentaire = res.data.data ?? res.data;
-      commentaires.value.push(commentaire);
-      nouveauCommentaire.value = "";
+      if (!nouveauCommentaire.value.trim() && !fichiersSelectionnes.value.length) return;
+      envoyEnCours.value = true;
+      try {
+          const res = await commentaireService.create(
+            tacheSelectionnee.value.id,
+            nouveauCommentaire.value,
+            fichiersSelectionnes.value
+          );
+          commentaires.value.push(res.data.data ?? res.data);
+          nouveauCommentaire.value = "";
+          fichiersSelectionnes.value = [];
+      } catch (e) {
+          console.error("Erreur:", e);
+      } finally {
+          envoyEnCours.value = false;
+      }
     }
 
     async function supprimerCommentaire(id) {
@@ -514,6 +541,27 @@ export default {
       dragData.value = null;
     }
 
+    function onFichiersChange(e) {
+  const files = Array.from(e.target.files);
+  for (const f of files) {
+    if (f.size > 10 * 1024 * 1024) { alert(`${f.name} dépasse 10 Mo`); return; }
+  }
+  fichiersSelectionnes.value.push(...files);
+}
+
+function retirerFichier(i) { fichiersSelectionnes.value.splice(i, 1); }
+
+function formatTaille(o) {
+  if (o < 1024) return o + " o";
+  if (o < 1048576) return (o / 1024).toFixed(1) + " Ko";
+  return (o / 1048576).toFixed(1) + " Mo";
+}
+
+async function telechargerFichier(pj) {
+  try { await fichierService.download(pj); } catch (e) { console.error(e); }
+}
+
+
     return {
       store,
       colonnes,
@@ -530,6 +578,9 @@ export default {
       utilisateurATache,
       commentaires,
       nouveauCommentaire,
+      fichiersSelectionnes, 
+      envoyEnCours, 
+      fileInput,
       toggleForm,
       ajouterColonne,
       ajouterTache,
@@ -546,6 +597,10 @@ export default {
       supprimerCommentaire,
       onDragStart,
       onDrop,
+      onFichiersChange, 
+      retirerFichier, 
+      formatTaille, 
+      telechargerFichier,
     };
   },
 };
@@ -1053,4 +1108,14 @@ export default {
   color: #fff;
   border-color: #e53e3e;
 }
+
+.pieces-jointes { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.pj-item { display: flex; align-items: center; gap: 0.4rem; background: #f7fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 0.3rem 0.6rem; font-size: 0.8rem; cursor: pointer; }
+.pj-item:hover { background: #edf2f7; }
+.pj-size { color: #a0aec0; font-size: 0.72rem; }
+.commentaire-form-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
+.fichiers-preview { display: flex; flex-direction: column; gap: 0.3rem; }
+.fichier-tag { display: flex; align-items: center; gap: 0.5rem; background: #edf2ff; border-radius: 6px; padding: 0.3rem 0.7rem; font-size: 0.8rem; }
+.btn-attach { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; cursor: pointer; font-size: 1.1rem; border-radius: 8px; flex-shrink: 0; }
+.btn-attach:hover { background: #f7fafc; }
 </style>
