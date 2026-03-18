@@ -7,21 +7,20 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@Document(collection = "commentaires")
+@Document(collection = "pieces_jointes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Commentaire {
+public class PieceJointe {
 
     @Id
     private String id;
 
-    private Long idTache;
+    private String nomFichier;
+    private String contentType;
+    private long taille;
+    private byte[] contenu;          // le fichier brut, max ~16 Mo
     private Long idUtilisateur;
-    private String contenu;
-    private LocalDateTime dateCreation;
-    private List<String> piecesJointesIds = new ArrayList<>();
+    private LocalDateTime dateUpload;
 }

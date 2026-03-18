@@ -6,6 +6,7 @@ import fr.ubo.kanban.model.mongoDB.Commentaire;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Component
 public class CommentaireMapper {
@@ -17,6 +18,7 @@ public class CommentaireMapper {
         dto.setIdUtilisateur(commentaire.getIdUtilisateur());
         dto.setContenu(commentaire.getContenu());
         dto.setDateCreation(commentaire.getDateCreation());
+        dto.setPiecesJointes(new ArrayList<>());
         return dto;
     }
 
@@ -27,6 +29,7 @@ public class CommentaireMapper {
         commentaire.setIdUtilisateur(idUtilisateur);
         commentaire.setContenu(dto.getContenu());
         commentaire.setDateCreation(LocalDateTime.now());
+        commentaire.setPiecesJointesIds(new ArrayList<>());
         return commentaire;
     }
 }

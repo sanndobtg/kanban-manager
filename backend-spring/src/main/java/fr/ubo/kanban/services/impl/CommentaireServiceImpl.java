@@ -9,14 +9,17 @@ import fr.ubo.kanban.model.Tache;
 import fr.ubo.kanban.repositories.CommentaireRepository;
 import fr.ubo.kanban.repositories.TacheRepository;
 import fr.ubo.kanban.services.CommentaireService;
+import fr.ubo.kanban.services.FichierService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,6 +30,7 @@ public class CommentaireServiceImpl implements CommentaireService {
     private final CommentaireRepository commentaireRepository;
     private final CommentaireMapper commentaireMapper;
     private final TacheRepository tacheRepository;
+    private final FichierService fichierService;
 
     @Override
     public List<CommentaireResponseDto> findByIdTache(Long idTache) {
@@ -35,7 +39,7 @@ public class CommentaireServiceImpl implements CommentaireService {
 
         return commentaireRepository.findByIdTache(idTache)
                 .stream()
-                .map(commentaireMapper::toResponseDto)
+                .map(this::toResponseWithFiles)
                 .toList();
     }
 
@@ -68,7 +72,11 @@ public class CommentaireServiceImpl implements CommentaireService {
                     "Seul l'auteur peut supprimer ce commentaire"
             );
         }
-
+        if (commentaire.getPiecesJointesIds() != null) {
+            commentaire.getPiecesJointesIds().forEach(pjId -> {
+                try { fichierService.delete(pjId); } catch (Exception ignored) {}
+            });
+        }
         commentaireRepository.deleteById(id);
     }
 
@@ -90,5 +98,38 @@ public class CommentaireServiceImpl implements CommentaireService {
                     "Accès refusé : vous n'êtes pas assigné à cette tâche"
             );
         }
+    }
+
+    @Override
+    @Transactional
+    public CommentaireResponseDto createWithFiles(Long idTache, CommentaireRequestDto dto,
+                                                  List<MultipartFile> fichiers) {
+        verifierAccesTache(idTache);
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Long idUtilisateur = Long.parseLong(auth.getName());
+
+        Commentaire commentaire = commentaireMapper.toEntity(dto, idTache, idUtilisateur);
+
+        List<String> pjIds = new ArrayList<>();
+        if (fichiers != null) {
+            for (MultipartFile fichier : fichiers) {
+                if (!fichier.isEmpty()) {
+                    pjIds.add(fichierService.upload(fichier, idUtilisateur).getId());
+                }
+            }
+        }
+        commentaire.setPiecesJointesIds(pjIds);
+        commentaire = commentaireRepository.save(commentaire);
+
+        return toResponseWithFiles(commentaire);
+    }
+
+    private CommentaireResponseDto toResponseWithFiles(Commentaire commentaire) {
+        CommentaireResponseDto dto = commentaireMapper.toResponseDto(commentaire);
+        if (commentaire.getPiecesJointesIds() != null && !commentaire.getPiecesJointesIds().isEmpty()) {
+            dto.setPiecesJointes(fichierService.getByIds(commentaire.getPiecesJointesIds()));
+        }
+        return dto;
     }
 }
