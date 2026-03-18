@@ -13,11 +13,11 @@ export const router = new Router();
 // ─────────────────────────────────────────
 router.post("/login", async (ctx) => {
   const body = await ctx.request.body.json();
-  const { email, mot_de_passe } = body;
+  const { email, motDePasse } = body; // mot_de_passe
 
-  if (!email || !mot_de_passe) {
+  if (!email || !motDePasse) { // mot_de_passe
     ctx.response.status = 400;
-    ctx.response.body = { error: "email et mot_de_passe requis" };
+    ctx.response.body = { error: "email et motDePasse requis" }; // mot_de_passe
     return;
   }
 
@@ -31,7 +31,7 @@ router.post("/login", async (ctx) => {
 
   // Vérifie le mot de passe avec BCrypt
   const motDePasseValide = await verifierMotDePasse(
-    mot_de_passe,
+    motDePasse, // mot_de_passe
     user.motDePasse,
   );
 
