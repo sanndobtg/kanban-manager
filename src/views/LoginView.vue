@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
           <label>Mot de passe</label>
-          <input v-model="mot_de_passe" type="password" placeholder="••••••••" required />
+          <input v-model="motDePasse" type="password" placeholder="••••••••" required /> //motDePasse
         </div>
         <p v-if="erreur" class="error-msg">{{ erreur }}</p>
         <button type="submit" class="btn-primary">Se connecter</button>
@@ -35,21 +35,21 @@ import { useAuthStore } from '../stores/auth.js'
 export default {
   setup() {
     const email        = ref('')
-    const mot_de_passe = ref('')
+    const motDePasse = ref('') //
     const erreur       = ref('')
     const router       = useRouter()
     const authStore    = useAuthStore()
 
     async function handleLogin() {
       try {
-        await authStore.login(email.value, mot_de_passe.value)
+        await authStore.login(email.value, motDePasse.value) //
         router.push('/tableaux')
       } catch (e) {
         erreur.value = 'Email ou mot de passe incorrect'
       }
     }
 
-    return { email, mot_de_passe, erreur, handleLogin }
+    return { email, motDePasse, erreur, handleLogin } //
   }
 }
 </script>
