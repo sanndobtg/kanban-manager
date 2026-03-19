@@ -4,10 +4,10 @@ const client = new Client();
 
 await client.connect({
   hostname: Deno.env.get("DB_HOST") || "localhost",
-  port: Number(Deno.env.get("DB_PORT")) || 3307, //8081
+  port: Number(Deno.env.get("DB_PORT")) || 3306, //8081
   db: Deno.env.get("DB_NAME") || "kanban_db",
   username: Deno.env.get("DB_USER") || "root",
-  password: "root", // ""
+  password: "", // ""
 });
 
 console.log("MySQL connecté ✅");

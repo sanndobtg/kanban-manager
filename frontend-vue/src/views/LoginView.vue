@@ -9,11 +9,21 @@
       <form @submit.prevent="handleLogin" class="auth-form">
         <div class="form-group">
           <label>Email</label>
-          <input v-model="email" type="email" placeholder="votre@email.com" required />
+          <input
+            v-model="email"
+            type="email"
+            placeholder="votre@email.com"
+            required
+          />
         </div>
         <div class="form-group">
           <label>Mot de passe</label>
-          <input v-model="motDePasse" type="password" placeholder="••••••••" required /> //motDePasse
+          <input
+            v-model="motDePasse"
+            type="password"
+            placeholder="••••••••"
+            required
+          />
         </div>
         <p v-if="erreur" class="error-msg">{{ erreur }}</p>
         <button type="submit" class="btn-primary">Se connecter</button>
@@ -28,30 +38,30 @@
 </template>
 
 <script>
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import { useAuthStore } from '../stores/auth.js'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
+import { useAuthStore } from "../stores/auth.js";
 
 export default {
   setup() {
-    const email        = ref('')
-    const motDePasse = ref('') //
-    const erreur       = ref('')
-    const router       = useRouter()
-    const authStore    = useAuthStore()
+    const email = ref("");
+    const motDePasse = ref(""); //
+    const erreur = ref("");
+    const router = useRouter();
+    const authStore = useAuthStore();
 
     async function handleLogin() {
       try {
-        await authStore.login(email.value, motDePasse.value) //
-        router.push('/tableaux')
+        await authStore.login(email.value, motDePasse.value); //
+        router.push("/tableaux");
       } catch (e) {
-        erreur.value = 'Email ou mot de passe incorrect'
+        erreur.value = "Email ou mot de passe incorrect";
       }
     }
 
-    return { email, motDePasse, erreur, handleLogin } //
-  }
-}
+    return { email, motDePasse, erreur, handleLogin }; //
+  },
+};
 </script>
 
 <style scoped>
@@ -69,7 +79,7 @@ export default {
   padding: 2.5rem;
   width: 100%;
   max-width: 420px;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
 .auth-header {
