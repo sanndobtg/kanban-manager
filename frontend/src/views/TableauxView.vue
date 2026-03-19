@@ -2,7 +2,9 @@
   <div class="page">
     <div class="page-header">
       <h1>Mes Tableaux</h1>
-      <button class="btn-primary" @click="showForm = !showForm">+ Nouveau tableau</button>
+      <button class="btn-primary" @click="showForm = !showForm">
+        + Nouveau tableau
+      </button>
     </div>
 
     <div v-if="showForm" class="create-form">
@@ -12,13 +14,21 @@
     </div>
 
     <div class="tableaux-grid">
-      <div v-for="tableau in store.tableaux" :key="tableau.id" class="tableau-card">
+      <div
+        v-for="tableau in store.tableaux"
+        :key="tableau.id"
+        class="tableau-card"
+      >
         <div class="tableau-card-body">
           <h3>{{ tableau.nom }}</h3>
         </div>
         <div class="tableau-card-footer">
-          <router-link :to="`/tableaux/${tableau.id}`" class="btn-link">Ouvrir →</router-link>
-          <button class="btn-danger" @click="store.delete(tableau.id)">Supprimer</button>
+          <router-link :to="`/tableaux/${tableau.id}`" class="btn-link"
+            >Ouvrir →</router-link
+          >
+          <button class="btn-danger" @click="store.delete(tableau.id)">
+            Supprimer
+          </button>
         </div>
       </div>
     </div>
@@ -26,27 +36,27 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
-import { useTableauxStore } from '../stores/tableaux.js'
+import { ref, onMounted } from "vue";
+import { useTableauxStore } from "../stores/tableaux.js";
 
 export default {
   setup() {
-    const store      = useTableauxStore()
-    const nouveauNom = ref('')
-    const showForm   = ref(false)
+    const store = useTableauxStore();
+    const nouveauNom = ref("");
+    const showForm = ref(false);
 
-    onMounted(() => store.fetchAll())
+    onMounted(() => store.fetchAll());
 
     async function creerTableau() {
-      if (!nouveauNom.value.trim()) return
-      await store.create({ nom: nouveauNom.value })
-      nouveauNom.value = ''
-      showForm.value   = false
+      if (!nouveauNom.value.trim()) return;
+      await store.create({ nom: nouveauNom.value });
+      nouveauNom.value = "";
+      showForm.value = false;
     }
 
-    return { store, nouveauNom, showForm, creerTableau }
-  }
-}
+    return { store, nouveauNom, showForm, creerTableau };
+  },
+};
 </script>
 
 <style scoped>
@@ -76,7 +86,7 @@ export default {
   background: #fff;
   padding: 1.2rem;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 .create-form input {
@@ -101,15 +111,17 @@ export default {
 .tableau-card {
   background: #fff;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
   border-top: 4px solid #1a1f36;
 }
 
 .tableau-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
 .tableau-card-body {
@@ -143,7 +155,9 @@ export default {
   transition: background 0.2s;
 }
 
-.btn-primary:hover { background: #2d3561; }
+.btn-primary:hover {
+  background: #2d3561;
+}
 
 .btn-secondary {
   background: transparent;
@@ -156,7 +170,9 @@ export default {
   transition: all 0.2s;
 }
 
-.btn-secondary:hover { background: #f7fafc; }
+.btn-secondary:hover {
+  background: #f7fafc;
+}
 
 .btn-danger {
   background: transparent;
@@ -168,7 +184,9 @@ export default {
   transition: color 0.2s;
 }
 
-.btn-danger:hover { color: #c53030; }
+.btn-danger:hover {
+  color: #c53030;
+}
 
 .btn-link {
   color: #4c6ef5;
@@ -178,5 +196,7 @@ export default {
   transition: color 0.2s;
 }
 
-.btn-link:hover { color: #2d3561; }
+.btn-link:hover {
+  color: #2d3561;
+}
 </style>
