@@ -1,5 +1,4 @@
 // Génère une paire de clés RSA au démarrage du serveur
-// En production, charger depuis des fichiers ou un vault
 
 let keyPair: CryptoKeyPair;
 let publicKeyJwk: JsonWebKey;
@@ -18,7 +17,7 @@ export async function initKeys(): Promise<void> {
 
   // Exporte la clé publique en JWK pour l'endpoint /jwks.json
   publicKeyJwk = await crypto.subtle.exportKey("jwk", keyPair.publicKey);
-  console.log("RSA key pair generated ✅");
+  console.log("RSA key pair generated ");
 }
 
 export function getPrivateKey(): CryptoKey {

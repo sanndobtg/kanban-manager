@@ -2,7 +2,7 @@ import { Router } from "oak";
 import { create, getNumericDate } from "djwt";
 import { config } from "./config.ts";
 import { initKeys, getPrivateKey, getPublicKeyJwk } from "./keys.ts";
-import { findUserByEmail } from "./db.ts";
+import { findUserByEmail, verifierMotDePasse } from "./db.ts";
 
 await initKeys();
 
@@ -10,19 +10,17 @@ export const router = new Router();
 
 // ─────────────────────────────────────────
 // POST /login
-// Body: { email, mot_de_passe }
 // ─────────────────────────────────────────
 router.post("/login", async (ctx) => {
   const body = await ctx.request.body.json();
-  const { email, mot_de_passe } = body;
+  const { email, motDePasse } = body; // mot_de_passe
 
-  if (!email || !mot_de_passe) {
+  if (!email || !motDePasse) { // mot_de_passe
     ctx.response.status = 400;
-    ctx.response.body = { error: "email et mot_de_passe requis" };
+    ctx.response.body = { error: "email et motDePasse requis" }; // mot_de_passe
     return;
   }
 
-  // Cherche l'utilisateur en BDD
   const user = await findUserByEmail(email);
 
   if (!user) {
@@ -31,16 +29,18 @@ router.post("/login", async (ctx) => {
     return;
   }
 
-  // Vérifie le mot de passe
-  // ⚠️ Si tes mots de passe sont hashés en bcrypt, dis-le moi
-  // Pour l'instant comparaison simple en texte brut
-  if (user.mot_de_passe !== mot_de_passe) {
+  // Vérifie le mot de passe avec BCrypt
+  const motDePasseValide = await verifierMotDePasse(
+    motDePasse, // mot_de_passe
+    user.motDePasse,
+  );
+
+  if (!motDePasseValide) {
     ctx.response.status = 401;
     ctx.response.body = { error: "Identifiants incorrects" };
     return;
   }
 
-  // Génère le JWT
   const token = await create(
     { alg: "RS256", typ: "JWT" },
     {
@@ -54,7 +54,7 @@ router.post("/login", async (ctx) => {
       iat: getNumericDate(0),
       exp: getNumericDate(60 * 60 * config.jwt.expirationHours),
     },
-    getPrivateKey()
+    getPrivateKey(),
   );
 
   ctx.response.status = 200;
@@ -67,7 +67,7 @@ router.post("/login", async (ctx) => {
       prenom: user.prenom,
       email: user.email,
       role: user.role,
-    }
+    },
   };
 });
 
@@ -78,12 +78,14 @@ router.get("/.well-known/jwks.json", (ctx) => {
   const jwk = getPublicKeyJwk();
   ctx.response.headers.set("Content-Type", "application/json");
   ctx.response.body = {
-    keys: [{
-      ...jwk,
-      use: "sig",
-      alg: "RS256",
-      kid: "auth-server-key-1",
-    }],
+    keys: [
+      {
+        ...jwk,
+        use: "sig",
+        alg: "RS256",
+        kid: "auth-server-key-1",
+      },
+    ],
   };
 });
 
