@@ -4,10 +4,11 @@ import fr.ubo.kanban.common.exception.NotFoundException;
 import fr.ubo.kanban.dtos.tableau.TableauRequestDto;
 import fr.ubo.kanban.dtos.tableau.TableauResponseDto;
 import fr.ubo.kanban.mappers.TableauMapper;
+import fr.ubo.kanban.model.Colonne;
 import fr.ubo.kanban.model.Tableau;
+import fr.ubo.kanban.model.Tache;
 import fr.ubo.kanban.model.Utilisateur;
-import fr.ubo.kanban.repositories.TableauRepository;
-import fr.ubo.kanban.repositories.UtilisateurRepository;
+import fr.ubo.kanban.repositories.*;
 import fr.ubo.kanban.services.TableauService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -26,6 +27,9 @@ public class TableauServiceImpl implements TableauService {
 
     private final TableauRepository tableauRepository;
     private final UtilisateurRepository utilisateurRepository;
+    private final ColonneRepository colonneRepository;
+    private final TacheRepository tacheRepository;
+    private final CommentaireRepository commentaireRepository;
     private final TableauMapper tableauMapper;
 
     @Override
@@ -71,8 +75,25 @@ public class TableauServiceImpl implements TableauService {
 
     @Override
     public void delete(Long id) {
-        tableauRepository.findById(id)
+        Tableau tableau = tableauRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException("Tableau non trouve avec l'id : " + id));
+
+        List<Colonne> colonnes = colonneRepository.findByTableauId(id);
+
+        for (Colonne colonne : colonnes) {
+            List<Tache> taches = tacheRepository.findByColonneId(colonne.getId());
+            for (Tache tache : taches) {
+                tache.getUtilisateurs().clear();
+                tacheRepository.save(tache);
+                commentaireRepository.deleteAllByIdTache(tache.getId());
+            }
+            tacheRepository.deleteAll(taches);
+        }
+        colonneRepository.deleteAll(colonnes);
+
+        tableau.getUtilisateurs().clear();
+        tableauRepository.save(tableau);
+
         tableauRepository.deleteById(id);
     }
 
