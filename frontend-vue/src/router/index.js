@@ -36,6 +36,10 @@ router.beforeEach((to) => {
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
     return "/login";
   }
+
+  if (to.path === "/utilisateurs" && !authStore.isAdmin) {
+    return "/tableaux"; // Redirige les non-admins vers les tableaux
+  }
 });
 
 export default router;
