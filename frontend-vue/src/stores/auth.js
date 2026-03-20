@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { authService } from "../services/authService.js";
+import router from "../router/index.js"; // Import du router
 
 export const useAuthStore = defineStore("auth", {
   state: () => ({
@@ -26,7 +27,9 @@ export const useAuthStore = defineStore("auth", {
       this.user = null;
       localStorage.removeItem("token");
       localStorage.removeItem("user");
-      window.location.href = "/login";
+      
+      // Utilisation du router au lieu de window.location
+      router.push("/login");
     },
   },
 });
